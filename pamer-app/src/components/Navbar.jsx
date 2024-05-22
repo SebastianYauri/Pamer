@@ -1,13 +1,24 @@
-// src/components/Navbar.jsx
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Transition } from '@headlessui/react';
+import { ChevronDownIcon } from '@heroicons/react/24/solid';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState('');
   const location = useLocation();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const toggleDropdown = (menu) => {
+    setDropdownOpen(dropdownOpen === menu ? '' : menu);
+  };
+
+  const closeDropdowns = () => {
+    setDropdownOpen('');
+    setIsOpen(false);
   };
 
   return (
@@ -19,31 +30,12 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="md:hidden">
-          <button
-            onClick={toggleMenu}
-            className="text-black focus:outline-none"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+          <button onClick={toggleMenu} className="text-black focus:outline-none">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               {isOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16m-7 6h7"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
               )}
             </svg>
           </button>
@@ -51,19 +43,83 @@ const Navbar = () => {
         <div className={`md:flex md:items-center ${isOpen ? 'block' : 'hidden'}`}>
           <ul className="md:flex md:space-x-4">
             <li>
-              <Link to="/" className={`block text-black py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/' ? 'bg-gray-200' : ''}`}>Inicio</Link>
+              <Link
+                to="/"
+                className={`block text-black py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/' ? 'bg-gray-200' : ''}`}
+                onClick={closeDropdowns}
+              >
+                Inicio
+              </Link>
+            </li>
+            <li className="relative md:inline-block">
+              <button
+                onClick={() => toggleDropdown('ciclos')}
+                className="flex items-center w-full text-black py-2 px-4 hover:bg-gray-200 rounded md:w-auto"
+              >
+                Ciclos
+                <ChevronDownIcon className="ml-1 h-5 w-5" />
+              </button>
+              <Transition
+                show={dropdownOpen === 'ciclos'}
+                enter="transition ease-out duration-100 transform"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="transition ease-in duration-75 transform"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+                className="md:absolute md:mt-2 md:w-48 md:shadow-lg"
+              >
+                <div className="py-1 bg-white md:rounded-md">
+                  <Link
+                    to="/ciclos/ciclo1"
+                    className="block px-4 py-2 text-black hover:bg-gray-200"
+                    onClick={closeDropdowns}
+                  >
+                    San Marcos
+                  </Link>
+                  <Link
+                    to="/ciclos/ciclo2"
+                    className="block px-4 py-2 text-black hover:bg-gray-200"
+                    onClick={closeDropdowns}
+                  >
+                    UNI
+                  </Link>
+                  <Link
+                    to="/ciclos/ciclo3"
+                    className="block px-4 py-2 text-black hover:bg-gray-200"
+                    onClick={closeDropdowns}
+                  >
+                    PUCP
+                  </Link>
+                </div>
+              </Transition>
             </li>
             <li>
-              <Link to="/sedes" className={`block text-black py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/sedes' ? 'bg-gray-200' : ''}`}>Sedes</Link>
+              <Link
+                to="/sedes"
+                className={`block text-black py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/registro' ? 'bg-gray-200' : ''}`}
+                onClick={closeDropdowns}
+              >
+                Sedes
+              </Link>
             </li>
             <li>
-              <Link to="/ciclos" className={`block text-black py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/ciclos' ? 'bg-gray-200' : ''}`}>Ciclos</Link>
+              <Link
+                to="/registro"
+                className={`block text-black py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/registro' ? 'bg-gray-200' : ''}`}
+                onClick={closeDropdowns}
+              >
+                Matriculate Ahora
+              </Link>
             </li>
             <li>
-              <Link to="/registro" className={`block text-black py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/registro' ? 'bg-gray-200' : ''}`}>Registro</Link>
-            </li>
-            <li>
-              <Link to="/login" className={`block text-black py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/login' ? 'bg-gray-200' : ''}`}>Login</Link>
+              <Link
+                to="/login"
+                className={`block text-black py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/login' ? 'bg-gray-200' : ''}`}
+                onClick={closeDropdowns}
+              >
+                Login
+              </Link>
             </li>
           </ul>
         </div>
