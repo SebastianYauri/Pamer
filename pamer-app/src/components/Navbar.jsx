@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
@@ -6,6 +6,7 @@ import { ChevronDownIcon } from '@heroicons/react/24/solid';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState('');
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
   const toggleMenu = () => {
@@ -21,8 +22,23 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="bg-white p-1 shadow-md rounded-md border border-black mx-3 mt-3 px-4">
+    <nav className={`bg-white p-1 shadow-md rounded-md border border-black mx-3 mt-3 px-4 sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-blue-900 shadow-lg' : 'bg-white'}`}>
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <Link to="/">
@@ -30,7 +46,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="md:hidden">
-          <button onClick={toggleMenu} className="text-black focus:outline-none">
+          <button onClick={toggleMenu} className={`focus:outline-none ${scrolled ? 'text-white' : 'text-black'}`}>
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               {isOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -45,7 +61,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/"
-                className={`block text-black py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/' ? 'bg-gray-200' : ''}`}
+                className={`block py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/' ? 'bg-gray-200' : ''} text-black`}
                 onClick={closeDropdowns}
               >
                 Inicio
@@ -54,10 +70,10 @@ const Navbar = () => {
             <li className="relative md:inline-block">
               <button
                 onClick={() => toggleDropdown('ciclos')}
-                className="flex items-center w-full text-black py-2 px-4 hover:bg-gray-200 rounded md:w-auto"
+                className="flex items-center w-full py-2 px-4 hover:bg-gray-200 rounded md:w-auto text-black"
               >
                 Ciclos
-                <ChevronDownIcon className="ml-1 h-5 w-5" />
+                <ChevronDownIcon className="ml-1 h-5 w-5 text-black" />
               </button>
               <Transition
                 show={dropdownOpen === 'ciclos'}
@@ -97,7 +113,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/sedes"
-                className={`block text-black py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/registro' ? 'bg-gray-200' : ''}`}
+                className={`block py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/registro' ? 'bg-gray-200' : ''} text-black`}
                 onClick={closeDropdowns}
               >
                 Sedes
@@ -106,7 +122,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/registro"
-                className={`block text-black py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/registro' ? 'bg-gray-200' : ''}`}
+                className={`block py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/registro' ? 'bg-gray-200' : ''} text-black`}
                 onClick={closeDropdowns}
               >
                 Matriculate Ahora
@@ -115,7 +131,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/login"
-                className={`block text-black py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/login' ? 'bg-gray-200' : ''}`}
+                className={`block py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/login' ? 'bg-gray-200' : ''} text-black`}
                 onClick={closeDropdowns}
               >
                 Login

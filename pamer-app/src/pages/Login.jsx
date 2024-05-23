@@ -1,6 +1,7 @@
 // src/components/Login.jsx
 import React from "react";
 import { Link } from "react-router-dom";
+import backgroundImage from "/log.svg"
 
 const Login = () => {
   return (
@@ -10,7 +11,7 @@ const Login = () => {
           <div
             className="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat"
             style={{
-              backgroundImage: `url(https://www.tailwindtap.com/assets/common/marketing.svg)`,
+              backgroundImage: `url(${backgroundImage})`,
             }}
           ></div>
         </div>
