@@ -128,7 +128,8 @@ const Home = () => {
             </SwiperSlide>
             <SwiperSlide>
               <img src="https://swiperjs.com/demos/images/nature-4.jpg" alt="Estudiante 4" />
-            </Swiper>
+            </SwiperSlide>
+          </Swiper>
         </div>
       </div>
     </div>
