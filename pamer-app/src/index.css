@@ -79,4 +79,7 @@ html, body {
   padding: 20px 0;
   margin-top: 20px; /* Espacio entre el contenido y el footer */
 }
+.rotate-45 {
+  transform: rotate(45deg);
+}
 
