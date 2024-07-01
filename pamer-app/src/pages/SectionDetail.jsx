@@ -9,12 +9,12 @@ const SectionDetail = () => {
     { id: 1, name: 'Alumno 1' },
     { id: 2, name: 'Alumno 2' },
     { id: 3, name: 'Alumno 3' }
-  ]); // Datos simulados de alumnos
+  ]); // Datos simulados de alumnos - QUITAR
   const [gradeRecords, setGradeRecords] = useState([
     { name: 'Alumno 1', note1: 15, note2: 16, note3: 17, note4: 18, note5: 19 },
     { name: 'Alumno 2', note1: 14, note2: 15, note3: 16, note4: 17, note5: 18 },
     { name: 'Alumno 3', note1: 13, note2: 14, note3: 15, note4: 16, note5: 17 }
-  ]); // Datos simulados de registros de notas
+  ]); // Datos simulados de registros de notas para probar la tabla 
 
   // Aquí puedes cargar los detalles de la sección usando el id, por ejemplo, desde una API o datos simulados
   const section = {
