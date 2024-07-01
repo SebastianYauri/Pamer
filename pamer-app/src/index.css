@@ -83,3 +83,44 @@ html, body {
   transform: rotate(45deg);
 }
 
+/* about.css */
+/* index.css */
+.sede-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+.sede-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  opacity: 0.9;
+}
+
+@media (min-width: 768px) {
+  .sede-card:hover {
+    transform: translateY(-8px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .sede-card:hover {
+    transform: translateY(-10px);
+  }
+}
+
+/* Animación para texto */
+.sede-card h3,
+.sede-card p {
+  transition: color 0.3s ease, transform 0.3s ease;
+  transform: translateX(0); /* Asegura que el texto esté en su posición inicial */
+}
+
+.sede-card:hover h3,
+.sede-card:hover p {
+  color: #4a90e2; /* Cambia el color al hacer hover */
+  transform: translateX(-3px); /* Movimiento suave de derecha a izquierda */
+}
+

@@ -107,6 +107,13 @@ const Navbar = () => {
                   >
                     PUCP
                   </Link>
+                  <Link
+                    to="/ciclos/ciclo4"
+                    className="block px-4 py-2 text-black hover:bg-gray-200"
+                    onClick={closeDropdowns}
+                  >
+                    ULIMA
+                  </Link>
                 </div>
               </Transition>
             </li>
