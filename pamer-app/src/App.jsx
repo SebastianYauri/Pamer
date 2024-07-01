@@ -7,14 +7,16 @@ import About from './pages/About';
 import Courses from './pages/Courses';
 import Registration from './pages/Registration';
 import Login from './pages/Login';
+import SupervisorView from './pages/SupervisorView'; // Importa SupervisorView
+import SectionDetail from './pages/SectionDetail'; // Importa la página de detalles de sección
 
 const AppContent = () => {
   const location = useLocation();
-  const showNavbarAndFooter = location.pathname !== '/login';
+  const hideNavbarAndFooter = ['/login', '/supervisor', '/section/'].some(path => location.pathname.startsWith(path));
 
   return (
     <div className="flex flex-col min-h-screen">
-      {showNavbarAndFooter && <Navbar />}
+      {!hideNavbarAndFooter && <Navbar />}
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -22,9 +24,11 @@ const AppContent = () => {
           <Route path="/ciclos" element={<Courses />} />
           <Route path="/registro" element={<Registration />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/supervisor" element={<SupervisorView />} />
+          <Route path="/section/:id" element={<SectionDetail />} /> {/* Ruta para los detalles de sección */}
         </Routes>
       </main>
-      {showNavbarAndFooter && <Footer />}
+      {!hideNavbarAndFooter && <Footer />}
     </div>
   );
 };
