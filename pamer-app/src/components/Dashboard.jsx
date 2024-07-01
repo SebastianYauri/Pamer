@@ -1,4 +1,3 @@
-// En Dashboard.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -7,7 +6,7 @@ const Dashboard = ({ sections }) => {
     <div className="grid grid-cols-3 gap-4">
       {sections.map(section => (
         <Link key={section.id} to={`/section/${section.id}`}>
-          <div className="bg-gray-200 p-4 rounded-lg cursor-pointer">
+          <div className="bg-gray-200 p-4 rounded-lg cursor-pointer hover:bg-gray-300 transition duration-300">
             <div className="relative overflow-hidden rounded-t-lg">
               <img
                 src={section.imageUrl}
@@ -21,7 +20,6 @@ const Dashboard = ({ sections }) => {
               <p className="mb-2">Modality: {section.modality}</p>
               <p className="mb-2">Location: {section.location}</p>
               <p>Schedule: {section.schedule}</p>
-              {/* Agrega más detalles según los datos de tu sección */}
             </div>
           </div>
         </Link>

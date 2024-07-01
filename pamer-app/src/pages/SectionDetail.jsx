@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { FaMapMarkerAlt, FaClock, FaInfoCircle, FaGraduationCap } from 'react-icons/fa';
 
 const SectionDetail = () => {
   const { id } = useParams(); // Obtener el id de la sección desde los parámetros de la ruta
   const [selectedStudent, setSelectedStudent] = useState('');
   const [grades, setGrades] = useState({ note1: '', note2: '', note3: '', note4: '', note5: '' });
-  const [students, setStudents] = useState([
+  const [students] = useState([
     { id: 1, name: 'Alumno 1' },
     { id: 2, name: 'Alumno 2' },
     { id: 3, name: 'Alumno 3' }
-  ]); // Datos simulados de alumnos - QUITAR
-  const [gradeRecords, setGradeRecords] = useState([
+  ]); // Datos simulados de alumnos
+  const [gradeRecords] = useState([
     { name: 'Alumno 1', note1: 15, note2: 16, note3: 17, note4: 18, note5: 19 },
     { name: 'Alumno 2', note1: 14, note2: 15, note3: 16, note4: 17, note5: 18 },
     { name: 'Alumno 3', note1: 13, note2: 14, note3: 15, note4: 16, note5: 17 }
@@ -25,12 +27,11 @@ const SectionDetail = () => {
     location: 'Ciudad',
     schedule: 'Horario',
     imageUrl: '/details.jpg', // URL de imagen de ejemplo
-    // Otros datos necesarios para cada sección
   };
 
   const handleGradeChange = (e) => {
     const { name, value } = e.target;
-    setGrades({ ...grades, [name]: value });
+    setGrades({ ...grades, [name]: value }); // Actualizar el estado de las notas
   };
 
   const handleSubmit = () => {
@@ -39,29 +40,103 @@ const SectionDetail = () => {
   };
 
   const handlePrint = () => {
-    window.print();
+    window.print(); // Función para imprimir la página
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">{section.name}</h1>
-      <div className="bg-gray-200 p-4 rounded-lg">
-        <div className="relative overflow-hidden rounded-t-lg">
+      <motion.h1
+        className="text-4xl font-bold mb-4"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        {section.name}
+      </motion.h1>
+      <div className="bg-gray-200 p-4 rounded-lg shadow-lg flex flex-col md:flex-row">
+        {/* Sección de detalles a la izquierda */}
+        <div className="md:w-1/2 p-4 space-y-6">
+          <motion.div
+            className="flex items-start"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="w-12 h-12 flex items-center justify-center bg-blue-500 text-white rounded mr-4">
+              <FaInfoCircle className="text-2xl" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold">Descripción</h2>
+              <p className="text-lg">{section.description}</p>
+            </div>
+          </motion.div>
+          <motion.div
+            className="flex items-start"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="w-12 h-12 flex items-center justify-center bg-yellow-500 text-white rounded mr-4">
+              <FaGraduationCap className="text-2xl" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold">Modalidad</h2>
+              <p className="text-lg">{section.modality}</p>
+            </div>
+          </motion.div>
+          <motion.div
+            className="flex items-start"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="w-12 h-12 flex items-center justify-center bg-purple-500 text-white rounded mr-4">
+              <FaMapMarkerAlt className="text-2xl" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold">Ubicación</h2>
+              <p className="text-lg">{section.location}</p>
+            </div>
+          </motion.div>
+          <motion.div
+            className="flex items-start"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="w-12 h-12 flex items-center justify-center bg-orange-500 text-white rounded mr-4">
+              <FaClock className="text-2xl" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold">Horario</h2>
+              <p className="text-lg">{section.schedule}</p>
+            </div>
+          </motion.div>
+        </div>
+        {/* Imagen de la sección a la derecha */}
+        <motion.div
+          className="md:w-1/2 relative overflow-hidden rounded-t-lg"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <img
             src={section.imageUrl}
             alt={section.name}
             className="w-full h-80 object-cover object-center"
           />
-        </div>
-        <div className="p-4">
-          <p className="mb-2">{section.description}</p>
-          <p className="mb-2">Modality: {section.modality}</p>
-          <p className="mb-2">Location: {section.location}</p>
-          <p>Schedule: {section.schedule}</p>
-        </div>
+        </motion.div>
       </div>
       <div className="mt-8">
-        <h2 className="text-2xl font-bold mb-4">Registrar Notas</h2>
+        <motion.h2
+          className="text-3xl font-bold mb-4"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Registrar Notas
+        </motion.h2>
+        {/* Selección de alumno y notas */}
         <div className="mb-4">
           <label htmlFor="student" className="block mb-2">Seleccionar Alumno:</label>
           <select
@@ -93,14 +168,22 @@ const SectionDetail = () => {
         </div>
         <button
           onClick={handleSubmit}
-          className="bg-blue-500 text-white py-2 px-4 rounded"
+          className="bg-blue-500 text-white py-2 px-4 rounded shadow-md hover:bg-blue-600 transition duration-300"
         >
           Registrar Notas
         </button>
       </div>
       <div className="mt-8">
-        <h2 className="text-2xl font-bold mb-4">Lista de Notas</h2>
-        <table className="min-w-full bg-white border border-gray-300">
+        <motion.h2
+          className="text-3xl font-bold mb-4"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Lista de Notas
+        </motion.h2>
+        {/* Tabla de notas */}
+        <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
           <thead>
             <tr className="bg-gray-200">
               <th className="py-2 px-4 border-b">Nombre</th>
@@ -128,7 +211,7 @@ const SectionDetail = () => {
       <div className="mt-8">
         <button
           onClick={handlePrint}
-          className="bg-green-500 text-white py-2 px-4 rounded"
+          className="bg-green-500 text-white py-2 px-4 rounded shadow-md hover:bg-green-600 transition duration-300"
         >
           Imprimir en PDF
         </button>
