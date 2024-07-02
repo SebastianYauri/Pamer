@@ -87,28 +87,28 @@ const Navbar = () => {
               >
                 <div className="py-1 bg-white md:rounded-md">
                   <Link
-                    to="/ciclos/ciclo1"
+                    to="/UNMSM"
                     className="block px-4 py-2 text-black hover:bg-gray-200"
                     onClick={closeDropdowns}
                   >
                     San Marcos
                   </Link>
                   <Link
-                    to="/ciclos/ciclo2"
+                    to="/UNI"
                     className="block px-4 py-2 text-black hover:bg-gray-200"
                     onClick={closeDropdowns}
                   >
                     UNI
                   </Link>
                   <Link
-                    to="/ciclos/ciclo3"
+                    to="/PUCP"
                     className="block px-4 py-2 text-black hover:bg-gray-200"
                     onClick={closeDropdowns}
                   >
                     PUCP
                   </Link>
                   <Link
-                    to="/ciclos/ciclo4"
+                    to="/ULIMA"
                     className="block px-4 py-2 text-black hover:bg-gray-200"
                     onClick={closeDropdowns}
                   >

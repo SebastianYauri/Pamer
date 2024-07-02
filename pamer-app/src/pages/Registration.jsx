@@ -1,10 +1,25 @@
-// src/pages/Registration.jsx
 import React from 'react';
-import headerImg from '/logo.svg'; // Adjust the path to your header image
-import studentIcon from '/user.svg'; // Adjust the path to your student icon
-import guardianIcon from '/user.svg'; // Adjust the path to your guardian icon
+import headerImg from '/logo.svg'; // Ajusta la ruta a tu imagen de encabezado
+import studentIcon from '/user.svg'; // Ajusta la ruta a tu icono de estudiante
+import guardianIcon from '/user.svg'; // Ajusta la ruta a tu icono de apoderado
+import { FaClock, FaUniversity } from 'react-icons/fa';
 
 const Registration = () => {
+  // Opciones para el select de ciclos universitarios
+  const cicloOptions = [
+    { value: 'uni', label: 'UNI' },
+    { value: 'sanMarcos', label: 'San Marcos' },
+    { value: 'ulima', label: 'ULIMA' },
+    { value: 'pucp', label: 'PUCP' },
+  ];
+
+  // Opciones para el select de horarios
+  const horarioOptions = [
+    { value: 'manana', label: 'Mañana (9:00 - 13:00)' },
+    { value: 'tarde', label: 'Tarde (14:00 - 18:00)' },
+    { value: 'noche', label: 'Noche (19:00 - 22:00)' },
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-100 to-blue-300 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl w-full space-y-8 bg-white p-10 rounded-lg shadow-lg">
@@ -141,6 +156,38 @@ const Registration = () => {
                 placeholder="Celular Adicional (opcional)"
               />
             </div>
+          </div>
+
+          {/* Ciclo Universitario */}
+          <div className="space-y-4">
+            <div className="flex items-center">
+              <FaUniversity className="text-blue-500" />
+              <h3 className="text-xl font-semibold text-blue-900">Ciclo Universitario</h3>
+            </div>
+            <select
+              className="form-select w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+            >
+              <option>Seleccione su ciclo universitario</option>
+              {cicloOptions.map(option => (
+                <option key={option.value} value={option.value}>{option.label}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Horarios Disponibles */}
+          <div className="space-y-4">
+            <div className="flex items-center">
+              <FaClock className="text-blue-500" />
+              <h3 className="text-xl font-semibold text-blue-900">Horarios Disponibles</h3>
+            </div>
+            <select
+              className="form-select w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+            >
+              <option>Seleccione un horario</option>
+              {horarioOptions.map(option => (
+                <option key={option.value} value={option.value}>{option.label}</option>
+              ))}
+            </select>
           </div>
 
           {/* Política de Privacidad y Botón de Registrar */}

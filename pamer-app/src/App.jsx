@@ -3,25 +3,33 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SidebarSupervisor from './components/SidebarSupervisor';
-import SidebarStudent from './components/SidebarStudent'; // Importa SidebarStudent
+import SidebarStudent from './components/SidebarStudent';
 import Home from './pages/Home';
 import About from './pages/About';
 import Courses from './pages/Courses';
-import Registration from './pages/Registration';
+import RegistEstudiante from './pages/RegistEstudiante';
 import Login from './pages/Login';
 import SupervisorView from './pages/SupervisorView';
 import SectionDetail from './pages/SectionDetail';
-import StudentView from './pages/StudentView'; // Importamos StudentView
+import StudentView from './pages/StudentView';
+import Registration from './pages/Registration'; // Importar el componente Registration
+import UNI from './pages/UNI'; // Importar el componente UNI
+import UNMSM from './pages/UNMSM'; // Importar el componente UNI
+import ULIMA from './pages/ULIMA'; // Importar el componente UNI
+import PUCP from './pages/PUCP'; // Importar el componente UNI
 
 const AppContent = () => {
   const location = useLocation();
-  
-  // Función para determinar cuándo ocultar Navbar y Footer
-  const hideNavbarAndFooter = ['/login', '/supervisor', '/section', '/student'].some(path => location.pathname.startsWith(path));
-  
-  // Función para determinar cuándo mostrar SidebarSupervisor o SidebarStudent
-  const showSidebarSupervisor = ['/supervisor', '/section'].some(path => location.pathname.startsWith(path));
-  const showSidebarStudent = ['/student'].some(path => location.pathname.startsWith(path));
+
+  // Rutas que deben ocultar Navbar y Footer
+  const hideNavbarAndFooterRoutes = ['/login', '/supervisor', '/section', '/student', '/registro/estudiante'];
+
+  // Determinar cuándo ocultar Navbar y Footer
+  const hideNavbarAndFooter = hideNavbarAndFooterRoutes.some(path => location.pathname.startsWith(path));
+
+  // Determinar cuándo mostrar SidebarSupervisor o SidebarStudent
+  const showSidebarSupervisor = location.pathname.startsWith('/supervisor') || location.pathname.startsWith('/section');
+  const showSidebarStudent = location.pathname.startsWith('/student');
 
   return (
     <div className="flex min-h-screen">
@@ -34,11 +42,16 @@ const AppContent = () => {
             <Route path="/" element={<Home />} />
             <Route path="/sedes" element={<About />} />
             <Route path="/ciclos" element={<Courses />} />
-            <Route path="/registro" element={<Registration />} />
+            <Route path="/registro/estudiante" element={<RegistEstudiante />} />
             <Route path="/login" element={<Login />} />
             <Route path="/supervisor" element={<SupervisorView />} />
             <Route path="/section/:id" element={<SectionDetail />} />
-            <Route path="/student" element={<StudentView />} /> {/* Ruta para StudentView */}
+            <Route path="/student" element={<StudentView />} />
+            <Route path="/registro" element={<Registration />} /> {/* Ruta para Registration */}
+            <Route path="/uni" element={<UNI />} /> {/* Ruta para UNI */}
+            <Route path="/unmsm" element={<UNMSM />} /> {/* Ruta para UNI */}
+            <Route path="/ulima" element={<ULIMA />} /> {/* Ruta para UNI */}
+            <Route path="/pucp" element={<PUCP />} /> {/* Ruta para UNI */}
           </Routes>
         </main>
         {!hideNavbarAndFooter && <Footer />}
