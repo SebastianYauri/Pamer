@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import backgroundImage from "/log.svg";
 
@@ -7,6 +8,46 @@ const transitionDuration = 0.8; // Duración de la transición en segundos
 
 const Login = () => {
   const [isSupervisor, setIsSupervisor] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get("http://192.168.1.85:8080/usuarios/login", {
+        params: {
+          correo: email,
+          password: password,
+        },
+      });
+      if (response.status === 200) {
+        localStorage.setItem("alumno", JSON.stringify(response.data));
+        navigate("/student");
+      }
+    } catch (error) {
+      setError("Credenciales incorrectas");
+    }
+  };
+
+  const handleSupervisorLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get("http://192.168.1.85:8080/instructor/login", {
+        params: {
+          correo: email,
+          password: password,
+        },
+      });
+      if (response.status === 200) {
+        localStorage.setItem("instructor", JSON.stringify(response.data));
+        navigate("/supervisor");
+      }
+    } catch (error) {
+      setError("Credenciales incorrectas");
+    }
+  };
 
   return (
     <div className="h-screen flex items-center justify-center px-5 lg:px-0 overflow-hidden relative">
@@ -43,18 +84,23 @@ const Login = () => {
                     Ingresa tus datos para iniciar sesión
                   </p>
                 </div>
-                <div className="flex flex-col gap-4">
+                <form onSubmit={handleLogin} className="flex flex-col gap-4">
                   <input
                     className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     type="email"
                     placeholder="Ingresa tu email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                   <input
                     className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     type="password"
                     placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
-                  <button className="mt-5 tracking-wide font-semibold bg-blue-900 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                  {error && <p className="text-red-500 text-xs">{error}</p>}
+                  <button type="submit" className="mt-5 tracking-wide font-semibold bg-blue-900 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
                     <svg
                       className="w-6 h-6 -ml-2"
                       fill="none"
@@ -71,7 +117,7 @@ const Login = () => {
                   </button>
                   <p className="mt-6 text-xs text-gray-600 text-center">
                     ¿Olvidaste tu contraseña?{" "}
-                    <Link to="/login">
+                    <Link to="/reset-password">
                       <span className="text-blue-900 font-semibold">
                         Restablecer contraseña
                       </span>
@@ -83,7 +129,7 @@ const Login = () => {
                   >
                     Iniciar sesión como supervisor
                   </span>
-                </div>
+                </form>
               </div>
             </div>
           </motion.div>
@@ -109,18 +155,23 @@ const Login = () => {
                     Ingresa tus datos para iniciar sesión
                   </p>
                 </div>
-                <div className="flex flex-col gap-4">
+                <form onSubmit={handleSupervisorLogin} className="flex flex-col gap-4">
                   <input
                     className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     type="email"
                     placeholder="Ingresa tu email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                   <input
                     className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     type="password"
                     placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
-                  <button className="mt-5 tracking-wide font-semibold bg-blue-900 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                  {error && <p className="text-red-500 text-xs">{error}</p>}
+                  <button type="submit" className="mt-5 tracking-wide font-semibold bg-blue-900 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
                     <svg
                       className="w-6 h-6 -ml-2"
                       fill="none"
@@ -137,7 +188,7 @@ const Login = () => {
                   </button>
                   <p className="mt-6 text-xs text-gray-600 text-center">
                     ¿Olvidaste tu contraseña?{" "}
-                    <Link to="/login">
+                    <Link to="/reset-password">
                       <span className="text-blue-900 font-semibold">
                         Restablecer contraseña
                       </span>
@@ -149,10 +200,9 @@ const Login = () => {
                   >
                     Iniciar sesión como usuario
                   </span>
-                </div>
+                </form>
               </div>
             </div>
-
             {/* Columna derecha con la imagen de fondo */}
             <div
               className="flex-1 md:w-2/3 bg-blue-900 text-center md:block hidden md:flex items-center justify-center"
