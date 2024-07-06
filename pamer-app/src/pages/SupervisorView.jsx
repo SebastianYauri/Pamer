@@ -1,76 +1,41 @@
-import React from 'react';
-import Dashboard from '../components/Dashboard'; 
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Dashboard from '../components/Dashboard';
 
 const SupervisorView = () => {
-  // Datos de secciones
-  const sections = [
-    {
-      id: 1,
-      name: 'Sección A',
-      description: 'Descripción de la Sección A',
-      modality: 'Presencial',
-      location: 'Ciudad A',
-      schedule: 'Lunes y Miércoles, 9:00 - 12:00',
-      imageUrl: './sbanner.jpg', //  URL de imagen
-     
-    },
-    {
-      id: 2,
-      name: 'Sección B',
-      description: 'Descripción de la Sección B',
-      modality: 'Virtual',
-      location: 'Ciudad B',
-      schedule: 'Martes y Jueves, 14:00 - 17:00',
-      imageUrl: './sbanner.jpg', // URL de imagen
-     
-    },
-    {
-      id: 3,
-      name: 'Sección B',
-      description: 'Descripción de la Sección B',
-      modality: 'Virtual',
-      location: 'Ciudad B',
-      schedule: 'Martes y Jueves, 14:00 - 17:00',
-      imageUrl: './sbanner.jpg', // URL de imagen
-     
-    },
-    {
-      id: 4,
-      name: 'Sección B',
-      description: 'Descripción de la Sección B',
-      modality: 'Virtual',
-      location: 'Ciudad B',
-      schedule: 'Martes y Jueves, 14:00 - 17:00',
-      imageUrl: './sbanner.jpg', // URL de imagen
-     
-    },
-    {
-      id: 5,
-      name: 'Sección B',
-      description: 'Descripción de la Sección B',
-      modality: 'Virtual',
-      location: 'Ciudad B',
-      schedule: 'Martes y Jueves, 14:00 - 17:00',
-      imageUrl: './sbanner.jpg', // URL de imagen
-     
-    },
-    {
-      id: 6,
-      name: 'Sección B',
-      description: 'Descripción de la Sección B',
-      modality: 'Virtual',
-      location: 'Ciudad B',
-      schedule: 'Martes y Jueves, 14:00 - 17:00',
-      imageUrl: './sbanner.jpg', // URL de imagen
-     
-    },
-    
-  ];
+  const [sections, setSections] = useState([]);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchCiclos = async () => {
+      const instructor = JSON.parse(localStorage.getItem("instructor"));
+      console.log("Instructor obtenido:", instructor);
+      if (instructor && instructor.id) {
+        try {
+          const response = await axios.get(`http://192.168.1.85:8080/ciclos/ciclosPorInstructor`, {
+            params: { instructorId: instructor.id }
+          });
+          console.log("Data from API:", response.data);
+          setSections(response.data);
+        } catch (error) {
+          console.error("API Error:", error);
+          setError("Error al obtener los ciclos del instructor");
+        }
+      }
+    };
+
+    fetchCiclos();
+  }, []);
 
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-4">Vista de Supervisor</h1>
-      <Dashboard sections={sections} />
+      {error && <p className="text-red-500">{error}</p>}
+      {sections.length > 0 ? (
+        <Dashboard sections={sections} />
+      ) : (
+        <p>No se encontraron ciclos para este instructor.</p>
+      )}
     </div>
   );
 };

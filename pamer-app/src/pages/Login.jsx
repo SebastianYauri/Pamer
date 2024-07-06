@@ -42,6 +42,8 @@ const Login = () => {
       });
       if (response.status === 200) {
         localStorage.setItem("instructor", JSON.stringify(response.data));
+        console.log("Instructor almacenado:", localStorage.getItem("instructor"));
+
         navigate("/supervisor");
       }
     } catch (error) {

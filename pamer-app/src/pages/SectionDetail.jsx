@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import { motion } from 'framer-motion';
 import { FaMapMarkerAlt, FaClock, FaInfoCircle, FaGraduationCap } from 'react-icons/fa';
 
@@ -7,18 +8,26 @@ const SectionDetail = () => {
   const { id } = useParams(); // Obtener el id de la sección desde los parámetros de la ruta
   const [selectedStudent, setSelectedStudent] = useState('');
   const [grades, setGrades] = useState({ note1: '', note2: '', note3: '', note4: '', note5: '' });
-  const [students] = useState([
-    { id: 1, name: 'Alumno 1' },
-    { id: 2, name: 'Alumno 2' },
-    { id: 3, name: 'Alumno 3' }
-  ]); // Datos simulados de alumnos
-  const [gradeRecords] = useState([
-    { name: 'Alumno 1', note1: 15, note2: 16, note3: 17, note4: 18, note5: 19 },
-    { name: 'Alumno 2', note1: 14, note2: 15, note3: 16, note4: 17, note5: 18 },
-    { name: 'Alumno 3', note1: 13, note2: 14, note3: 15, note4: 16, note5: 17 }
-  ]); // Datos simulados de registros de notas para probar la tabla 
+  const [students, setStudents] = useState([]); // Estado para los alumnos
+  const [gradeRecords, setGradeRecords] = useState([]); // Estado para los registros de notas
+  const [error, setError] = useState(""); // Estado para manejar errores
 
-  // Aquí puedes cargar los detalles de la sección usando el id, por ejemplo, desde una API o datos simulados
+  // Cargar los detalles de la sección y los alumnos matriculados usando el id
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const response = await axios.get(`http://192.168.1.85:8080/matricula/listarPorCiclo`, {
+          params: { idCiclo: id }
+        });
+        setStudents(response.data);
+      } catch (error) {
+        setError("Error al obtener los alumnos matriculados");
+      }
+    };
+
+    fetchStudents();
+  }, [id]);
+
   const section = {
     id: id,
     name: 'Nombre de la Sección',
@@ -147,7 +156,7 @@ const SectionDetail = () => {
           >
             <option value="">Seleccione un alumno</option>
             {students.map(student => (
-              <option key={student.id} value={student.id}>{student.name}</option>
+              <option key={student.id} value={student.id}>{`${student.nombre} ${student.apellido}`}</option>
             ))}
           </select>
         </div>
@@ -173,6 +182,7 @@ const SectionDetail = () => {
           Registrar Notas
         </button>
       </div>
+      
       <div className="mt-8">
         <motion.h2
           className="text-3xl font-bold mb-4"
