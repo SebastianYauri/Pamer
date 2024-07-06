@@ -34,9 +34,9 @@ const Home = () => {
   });
 
   const promos = [
-    { number: '+11000', title: 'ingresantes a San Marcos' },
-    { number: '+170', title: 'primeros puestos' },
-    { number: '+35', title: 'De experiencia' },
+    { number: '11000', title: 'ingresantes a San Marcos' },
+    { number: '170', title: 'primeros puestos' },
+    { number: '35', title: 'Años de experiencia' },
     { number: '6', title: 'Sedes en todo Lima' },
   ];
 
