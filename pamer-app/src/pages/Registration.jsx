@@ -26,7 +26,7 @@ const Registration = () => {
         <div className="text-center">
           <img src={headerImg} alt="Header" className="mx-auto h-20 w-auto" />
           <h2 className="text-3xl font-extrabold text-blue-900 mt-4">
-            Formulario de Matrícula
+            Formulario de Inscripción
           </h2>
           <p className="mt-2 text-sm text-gray-600">
             Por favor, completa los siguientes campos para matricularte.
@@ -97,20 +97,7 @@ const Registration = () => {
             </div>
           </div>
 
-          {/* Elegir el Programa */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-semibold text-blue-900">Elegir el Programa de tu Preferencia</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <label className="inline-flex items-center">
-                <input type="radio" className="form-radio text-blue-600" name="modalidad" value="virtual" />
-                <span className="ml-2">Virtual</span>
-              </label>
-              <label className="inline-flex items-center">
-                <input type="radio" className="form-radio text-blue-600" name="modalidad" value="presencial" />
-                <span className="ml-2">Presencial</span>
-              </label>
-            </div>
-          </div>
+
 
           {/* Datos del Apoderado */}
           <div className="space-y-4">
@@ -158,37 +145,6 @@ const Registration = () => {
             </div>
           </div>
 
-          {/* Ciclo Universitario */}
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <FaUniversity className="text-blue-500" />
-              <h3 className="text-xl font-semibold text-blue-900">Ciclo Universitario</h3>
-            </div>
-            <select
-              className="form-select w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-            >
-              <option>Seleccione su ciclo universitario</option>
-              {cicloOptions.map(option => (
-                <option key={option.value} value={option.value}>{option.label}</option>
-              ))}
-            </select>
-          </div>
-
-          {/* Horarios Disponibles */}
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <FaClock className="text-blue-500" />
-              <h3 className="text-xl font-semibold text-blue-900">Horarios Disponibles</h3>
-            </div>
-            <select
-              className="form-select w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-            >
-              <option>Seleccione un horario</option>
-              {horarioOptions.map(option => (
-                <option key={option.value} value={option.value}>{option.label}</option>
-              ))}
-            </select>
-          </div>
 
           {/* Política de Privacidad y Botón de Registrar */}
           <div className="space-y-4">
