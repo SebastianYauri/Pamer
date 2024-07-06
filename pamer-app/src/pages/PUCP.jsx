@@ -16,46 +16,60 @@ const PUCP = () => {
   };
 
   return (
-    <div>
+    <div className="px-4 md:px-8 lg:px-12">
       {/* Banner Carousel */}
-      <div className="max-w-screen-xl mx-auto mb-8 w-3/4">
+      <div className="max-w-screen-xl mx-auto mb-8">
         <Slider {...settings} className="w-full">
           <div>
-            <img src="/pucp1.webp" alt="UNMSM Banner 1" className="w-full h-auto object-contain" style={{ maxHeight: '300px' }} />
+            <img
+              src="/pucp1.webp"
+              alt="UNMSM Banner 1"
+              className="w-full h-auto object-contain rounded-lg"
+              style={{ maxHeight: '300px' }}
+            />
           </div>
           <div>
-            <img src="/pucp2.webp" alt="UNMSM Banner 2" className="w-full h-auto object-contain" style={{ maxHeight: '300px' }} />
+            <img
+              src="/pucp2.webp"
+              alt="UNMSM Banner 2"
+              className="w-full h-auto object-contain rounded-lg"
+              style={{ maxHeight: '300px' }}
+            />
           </div>
         </Slider>
       </div>
 
       {/* Content Section */}
-      <div className="max-w-screen-lg mx-auto px-4 py-8 bg-gray-100 rounded-lg shadow-lg">
+      <div className="max-w-screen-lg mx-auto bg-gray-100 rounded-lg shadow-lg p-6 md:p-8">
         <h2 className="text-3xl font-bold mb-4">Pontificia Universidad Católica del Perú (PUCP)</h2>
-        <div className="flex items-center mb-4 space-x-4">
+        <div className="flex items-center mb-4 space-x-2 md:space-x-4">
           <FaUsers className="text-2xl text-gray-700" />
-          <p>Dirigido a estudiantes que buscan una formación integral basada en la excelencia académica.</p>
+          <p className="text-sm md:text-base">
+            Dirigido a estudiantes que buscan una formación integral basada en la excelencia académica.
+          </p>
         </div>
-        <div className="flex items-center mb-4 space-x-4">
+        <div className="flex items-center mb-4 space-x-2 md:space-x-4">
           <FaMapMarkerAlt className="text-2xl text-gray-700" />
-          <p>Sedes: Lima, San Miguel.</p>
+          <p className="text-sm md:text-base">Sedes: Lima, San Miguel.</p>
         </div>
-        <div className="flex items-center mb-4 space-x-4">
+        <div className="flex items-center mb-4 space-x-2 md:space-x-4">
           <FaClock className="text-2xl text-gray-700" />
-          <div>
+          <div className="text-sm md:text-base">
             <p>Modalidad: Presencial y Virtual</p>
             <p>Inicios: Consulta por nuestros próximos inicios</p>
             <p>Duración: -</p>
             <p>Horario:</p>
-            <ul className="list-disc ml-6">
+            <ul className="list-disc ml-4 md:ml-6">
               <li>Lunes a viernes de 8:00 am a 6:00 pm.</li>
               <li>Sábados de 8:00 am a 12:00 pm.</li>
             </ul>
           </div>
         </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 md:space-x-4">
           <FaFileDownload className="text-2xl text-gray-700" />
-          <a href="#" className="underline">Descargar aquí folleto informativo</a>
+          <a href="#" className="text-sm md:text-base underline">
+            Descargar aquí folleto informativo
+          </a>
         </div>
       </div>
     </div>
