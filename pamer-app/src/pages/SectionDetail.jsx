@@ -43,10 +43,37 @@ const SectionDetail = () => {
     setGrades({ ...grades, [name]: value }); // Actualizar el estado de las notas
   };
 
-  const handleSubmit = () => {
-    // Aquí iría la lógica para registrar las notas en la base de datos
-    console.log('Registrar notas:', selectedStudent, grades);
+  const handleSubmit = async () => {
+    const processedGrades = {
+        n1: grades.note1 ? parseFloat(grades.note1) : 0,
+        n2: grades.note2 ? parseFloat(grades.note2) : 0,
+        n3: grades.note3 ? parseFloat(grades.note3) : 0,
+        n4: grades.note4 ? parseFloat(grades.note4) : 0,
+        n5: grades.note5 ? parseFloat(grades.note5) : 0,
+    };
+
+    try {
+        // Obtener detalles completos de Alumno antes de enviar la solicitud
+        const responseAlumno = await axios.get(`http://192.168.1.85:8080/alumnos/${selectedStudent}`);
+        const alumno = responseAlumno.data;
+
+        const ciclo = { id: id }; // No necesita obtenerlo si ya lo tienes en detalle en el frontend
+
+        const notaData = {
+            alumno: alumno,
+            ciclo: ciclo,
+            ...processedGrades,
+        };
+
+        const response = await axios.post('http://192.168.1.85:8090/notas/guardar', notaData);
+        console.log(response.data);
+        alert("Notas registradas con éxito");
+    } catch (error) {
+        console.error("Error al registrar las notas:", error.response ? error.response.data : error.message);
+        alert("Error al registrar las notas");
+    }
   };
+
 
   const handlePrint = () => {
     window.print(); // Función para imprimir la página
@@ -163,9 +190,9 @@ const SectionDetail = () => {
         <div className="grid grid-cols-5 gap-4 mb-4">
           {['note1', 'note2', 'note3', 'note4', 'note5'].map(note => (
             <div key={note}>
-              <label htmlFor={note} className="block mb-2">Nota {note.slice(-1)}:</label>
+              <label htmlFor={note} className="block mb-2">{`Nota ${note.charAt(note.length - 1)}`}</label>
               <input
-                type="text"
+                type="number"
                 id={note}
                 name={note}
                 value={grades[note]}
@@ -182,17 +209,32 @@ const SectionDetail = () => {
           Registrar Notas
         </button>
       </div>
-      
       <div className="mt-8">
         <motion.h2
           className="text-3xl font-bold mb-4"
-          initial={{ opacity: 0, x: 20 }}
+          initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Lista de Notas
+          Lista de Alumnos Matriculados
         </motion.h2>
-        {/* Tabla de notas */}
+        <ul className="list-disc list-inside">
+          {students.map((student, index) => (
+            <li key={index}>
+              {student.nombre} {student.apellido}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="mt-8">
+        <motion.h2
+          className="text-3xl font-bold mb-4"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Registro de Notas
+        </motion.h2>
         <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
           <thead>
             <tr className="bg-gray-200">
