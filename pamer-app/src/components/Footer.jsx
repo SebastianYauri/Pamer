@@ -1,6 +1,6 @@
 // src/components/CustomFooter.jsx
 import React from 'react';
-import { BsFacebook, BsInstagram, BsTwitter, BsTiktok } from "react-icons/bs";
+import { BsFacebook, BsInstagram, BsTwitter, BsTiktok, BsYoutube } from "react-icons/bs";
 
 const CustomFooter = () => {
   return (
@@ -22,10 +22,10 @@ const CustomFooter = () => {
           <div>
             <h2 className="mb-6 text-sm font-semibold uppercase">Redes Sociales</h2>
             <ul className="space-y-4 text-sm">
-              <li><a href="#" className="hover:underline">Facebook</a></li>
-              <li><a href="#" className="hover:underline">Instagram</a></li>
-              <li><a href="#" className="hover:underline">Tiktok</a></li>
-              <li><a href="#" className="hover:underline">Youtube</a></li>
+              <li><a href="https://www.facebook.com/PAMERACADEMIAS" className="hover:underline">Facebook</a></li>
+              <li><a href="https://www.instagram.com/academiaspamer/" className="hover:underline">Instagram</a></li>
+              <li><a href="https://www.tiktok.com/@academias.pamer" className="hover:underline">Tiktok</a></li>
+              <li><a href="https://www.youtube.com/user/CORPORACIONPAMER" className="hover:underline">Youtube</a></li>
             </ul>
           </div>
           <div>
@@ -42,10 +42,10 @@ const CustomFooter = () => {
             © 2024 Corporación Educativa <span className="font-semibold">Pamer</span>
           </div>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-gray-500 hover:text-white"><BsFacebook /></a>
-            <a href="#" className="text-gray-500 hover:text-white"><BsInstagram /></a>
-            <a href="#" className="text-gray-500 hover:text-white"><BsTwitter /></a>
-            <a href="#" className="text-gray-500 hover:text-white"><BsTiktok /></a>
+            <a href="https://www.facebook.com/PAMERACADEMIAS" className="text-gray-500 hover:text-white"><BsFacebook /></a>
+            <a href="https://www.instagram.com/academiaspamer/" className="text-gray-500 hover:text-white"><BsInstagram /></a>
+            <a href="https://www.youtube.com/user/CORPORACIONPAMER" className="text-gray-500 hover:text-white"><BsYoutube /></a>
+            <a href="https://www.tiktok.com/@academias.pamer" className="text-gray-500 hover:text-white"><BsTiktok /></a>
           </div>
         </div>
       </div>
