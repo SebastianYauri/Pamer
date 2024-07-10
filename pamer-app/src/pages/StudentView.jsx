@@ -1,17 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FaBook, FaClock, FaChalkboard, FaUserGraduate } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import axios from 'axios'; // Importa axios para hacer llamadas a la API
 
 const StudentView = () => {
   const [isOpen, setIsOpen] = useState(true); // Estado para controlar la visibilidad del sidebar
+  const [gradesData, setGradesData] = useState([]); // Estado para almacenar las notas del alumno
+  const [alumno, setAlumno] = useState(null); // Estado para almacenar los datos del alumno
 
   // Función para alternar la visibilidad del sidebar
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+
+  // Hook para obtener el objeto Alumno desde localStorage
+  useEffect(() => {
+    const storedAlumno = localStorage.getItem("alumno");
+    if (storedAlumno) {
+      setAlumno(JSON.parse(storedAlumno));
+    }
+  }, []);
+
+  // Hook para obtener las notas del alumno desde el backend
+  useEffect(() => {
+    const fetchGrades = async () => {
+      if (alumno) {
+        try {
+          const response = await axios.get(`http://192.168.1.85:8090/notas/listarPorAlumno`, {
+            params: { idAlumno: alumno.id },
+          });
+          setGradesData(response.data);
+        } catch (error) {
+          console.error("Error fetching grades data:", error);
+        }
+      }
+    };
+
+    fetchGrades();
+  }, [alumno]);
 
   // Datos de ejemplo para el slider de banners
   const bannerImages = [
@@ -38,13 +67,6 @@ const StudentView = () => {
     { time: '11:00 - 12:00', Lunes: 'Matemáticas', Martes: '', Miércoles: 'Historia', Jueves: '', Viernes: 'Ciencias' },
     { time: '12:00 - 13:00', Lunes: '', Martes: '', Miércoles: '', Jueves: '', Viernes: '' },
     { time: '13:00 - 14:00', Lunes: '', Martes: '', Miércoles: '', Jueves: '', Viernes: '' },
-  ];
-
-  // Datos de ejemplo para la sección de notas
-  const gradesData = [
-    { subject: 'Matemáticas', grade: '20' },
-    { subject: 'Historia', grade: '12' },
-    { subject: 'Ciencias', grade: '14' },
   ];
 
   return (
@@ -137,8 +159,13 @@ const StudentView = () => {
             <div key={index} className="bg-white shadow-md rounded-lg p-4 flex items-center space-x-4">
               <FaBook className="text-4xl text-blue-500" />
               <div>
-                <h3 className="text-lg font-semibold">{grade.subject}</h3>
-                <p className="text-xl font-bold">{grade.grade}</p>
+                <h3 className="text-lg font-semibold">{grade.ciclo.nombre}</h3> {/* Mostrar el nombre del ciclo */}
+                <p className="text-md">Alumno: {grade.alumno.nombre}</p> {/* Mostrar el nombre del alumno */}
+                <p className="text-md">N1: {grade.n1}</p> {/* Mostrar la nota 1 */}
+                <p className="text-md">N2: {grade.n2}</p> {/* Mostrar la nota 2 */}
+                <p className="text-md">N3: {grade.n3}</p> {/* Mostrar la nota 3 */}
+                <p className="text-md">N4: {grade.n4}</p> {/* Mostrar la nota 4 */}
+                <p className="text-md">N5: {grade.n5}</p> {/* Mostrar la nota 5 */}
               </div>
             </div>
           ))}
