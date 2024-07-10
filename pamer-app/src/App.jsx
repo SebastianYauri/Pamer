@@ -17,20 +17,21 @@ import UNI from './pages/UNI'; // Importar el componente UNI
 import UNMSM from './pages/UNMSM'; // Importar el componente UNI
 import ULIMA from './pages/ULIMA'; // Importar el componente UNI
 import PUCP from './pages/PUCP'; // Importar el componente UNI
+import BoletaPago from './pages/BoletaPago'; // Importar el componente BoletaPago
 
 const AppContent = () => {
   const location = useLocation();
 
   // Rutas que deben ocultar Navbar y Footer
-  const hideNavbarAndFooterRoutes = ['/login', '/supervisor', '/section', '/student', '/registro/estudiante'];
+  const hideNavbarAndFooterRoutes = ['/login', '/supervisor', '/section', '/student', '/registro/estudiante', '/student/boletapago'];
 
   // Determinar cuándo ocultar Navbar y Footer
   const hideNavbarAndFooter = hideNavbarAndFooterRoutes.some(path => location.pathname.startsWith(path));
 
   // Determinar cuándo mostrar SidebarSupervisor o SidebarStudent
   const showSidebarSupervisor = location.pathname.startsWith('/supervisor') || location.pathname.startsWith('/section');
-  const showSidebarStudent = location.pathname.startsWith('/student');
-
+  const showSidebarStudent = location.pathname.startsWith('/student') && !location.pathname.startsWith('/student/boletapago');
+  
   return (
     <div className="flex min-h-screen">
       {showSidebarSupervisor && <SidebarSupervisor />}
@@ -52,6 +53,7 @@ const AppContent = () => {
             <Route path="/unmsm" element={<UNMSM />} /> {/* Ruta para UNI */}
             <Route path="/ulima" element={<ULIMA />} /> {/* Ruta para UNI */}
             <Route path="/pucp" element={<PUCP />} /> {/* Ruta para UNI */}
+            <Route path="/student/boletapago" element={<BoletaPago />} /> {/* Ruta para BoletaPago */}
           </Routes>
         </main>
         {!hideNavbarAndFooter && <Footer />}
