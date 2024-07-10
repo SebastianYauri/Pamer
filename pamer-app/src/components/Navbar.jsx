@@ -132,7 +132,7 @@ const Navbar = () => {
                 className={`block py-2 px-4 hover:bg-gray-200 rounded ${location.pathname === '/registro' ? 'bg-gray-200' : ''} text-black`}
                 onClick={closeDropdowns}
               >
-                Matriculate Ahora
+                ¡Inscríbete ahora!
               </Link>
             </li>
             <li>

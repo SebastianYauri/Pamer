@@ -34,16 +34,16 @@ const Home = () => {
   });
 
   const promos = [
-    { number: '+11000', title: 'ingresantes a San Marcos' },
-    { number: '+170', title: 'primeros puestos' },
-    { number: '+35', title: 'De experiencia' },
+    { number: '11000', title: 'ingresantes a San Marcos' },
+    { number: '170', title: 'primeros puestos' },
+    { number: '35', title: 'Años de experiencia' },
     { number: '6', title: 'Sedes en todo Lima' },
   ];
 
   const faqs = [
     {
       question: "¿Pamer tiene un sistema de Enseñanza y Aprendizaje en Línea?",
-      answer: " Sí, Pamer ofrece un sistema de enseñanza y aprendizaje en línea."
+      answer: "Sí, Pamer ofrece un sistema de enseñanza y aprendizaje en línea."
     },
     {
       question: "Cómo puede mi hijo hacer sus consultas académicas en línea?",
@@ -78,6 +78,7 @@ const Home = () => {
 
   return (
     <div className="home-content">
+      {/* Carousel Principal */}
       <div className="w-full sm:h-screen mb-10 lg:mb-20">
         <Slider
           dots={true}
@@ -100,6 +101,7 @@ const Home = () => {
         </Slider>
       </div>
 
+      {/* Sección de Universidades */}
       <div className="flex flex-col items-center p-8 min-h-[60vh]" ref={cyclesInViewRef}>
         <h3 className="text-4xl lg:text-5xl font-bold mb-8">CICLOS</h3>
         <p className="text-2xl lg:text-3xl mb-8">Elige la preparación preuniversitaria que más se ajuste a tus necesidades y alcanza tus metas académicas.</p>
@@ -126,6 +128,7 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Sección de Promociones */}
       <div ref={promosInViewRef} className="bg-blue-500 py-8 min-h-[60vh] flex items-center justify-center">
         <div className="container mx-auto flex flex-col items-center">
           <h3 className="text-4xl lg:text-5xl font-bold text-white mb-4">Nuestras Estadísticas</h3>
@@ -151,7 +154,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Nueva sección con carrusel tipo cubo y mensaje */}
+      {/* Sección de Alumnos Destacados */}
       <div className="flex flex-col lg:flex-row items-center p-8 min-h-[60vh]">
         <div className="lg:w-1/2 text-center lg:text-left mb-8 lg:mb-0">
           <h3 className="text-4xl lg:text-5xl font-bold">Estos son nuestros mejores alumnos</h3>
@@ -187,7 +190,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Nueva sección FAQ */}
+      {/* Sección de Preguntas Frecuentes */}
       <div className="flex flex-col items-center p-8 bg-gray-100 min-h-[60vh]">
         <h3 className="text-4xl lg:text-5xl font-bold mb-8">PREGUNTAS FRECUENTES</h3>
         <div className="w-full max-w-2xl space-y-4">
