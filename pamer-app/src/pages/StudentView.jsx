@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { FaBook, FaClock, FaChalkboard, FaUserGraduate } from 'react-icons/fa';
+import { FaBook, FaClock, FaChalkboard, FaUserGraduate, FaRegStar } from 'react-icons/fa'; // Importar iconos adicionales
 import { motion } from 'framer-motion';
 import axios from 'axios'; // Importa axios para hacer llamadas a la API
 
@@ -156,16 +156,35 @@ const StudentView = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {gradesData.map((grade, index) => (
-            <div key={index} className="bg-white shadow-md rounded-lg p-4 flex items-center space-x-4">
-              <FaBook className="text-4xl text-blue-500" />
-              <div>
-                <h3 className="text-lg font-semibold">{grade.ciclo.nombre}</h3> {/* Mostrar el nombre del ciclo */}
-                <p className="text-md">Alumno: {grade.alumno.nombre}</p> {/* Mostrar el nombre del alumno */}
-                <p className="text-md">N1: {grade.n1}</p> {/* Mostrar la nota 1 */}
-                <p className="text-md">N2: {grade.n2}</p> {/* Mostrar la nota 2 */}
-                <p className="text-md">N3: {grade.n3}</p> {/* Mostrar la nota 3 */}
-                <p className="text-md">N4: {grade.n4}</p> {/* Mostrar la nota 4 */}
-                <p className="text-md">N5: {grade.n5}</p> {/* Mostrar la nota 5 */}
+            <div key={index} className="bg-white shadow-md rounded-lg p-6 flex flex-col space-y-4">
+              <div className="flex items-center space-x-4">
+                <FaRegStar className="text-4xl text-blue-500" />
+                <div>
+                  <h3 className="text-lg font-semibold">{grade.ciclo.nombre}</h3>
+                  <p className="text-sm text-gray-500">Alumno: {grade.alumno.nombre}</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4 text-center">
+                <div className="bg-gray-100 p-2 rounded-lg">
+                  <p className="font-bold">N1</p>
+                  <p>{grade.n1}</p>
+                </div>
+                <div className="bg-gray-100 p-2 rounded-lg">
+                  <p className="font-bold">N2</p>
+                  <p>{grade.n2}</p>
+                </div>
+                <div className="bg-gray-100 p-2 rounded-lg">
+                  <p className="font-bold">N3</p>
+                  <p>{grade.n3}</p>
+                </div>
+                <div className="bg-gray-100 p-2 rounded-lg">
+                  <p className="font-bold">N4</p>
+                  <p>{grade.n4}</p>
+                </div>
+                <div className="bg-gray-100 p-2 rounded-lg">
+                  <p className="font-bold">N5</p>
+                  <p>{grade.n5}</p>
+                </div>
               </div>
             </div>
           ))}
