@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import backgroundImage from "/log.svg";
+import { BASE_URL } from '../config/apiConfig'; 
 
 const transitionDuration = 0.8; // Duración de la transición en segundos
 
@@ -16,7 +17,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get("http://192.168.1.85:8080/usuarios/login", {
+      const response = await axios.get(`${BASE_URL}:8080/usuarios/login`, {
         params: {
           correo: email,
           password: password,
@@ -34,7 +35,7 @@ const Login = () => {
   const handleSupervisorLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get("http://192.168.1.85:8080/instructor/login", {
+      const response = await axios.get(`${BASE_URL}:8080/instructor/login`, {
         params: {
           correo: email,
           password: password,

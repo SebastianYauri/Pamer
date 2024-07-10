@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { FaMapMarkerAlt, FaClock, FaInfoCircle, FaGraduationCap } from 'react-icons/fa';
+import { BASE_URL } from '../config/apiConfig'; 
 
 const SectionDetail = () => {
   const { id } = useParams(); // Obtener el id de la sección desde los parámetros de la ruta
@@ -16,7 +17,7 @@ const SectionDetail = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get(`http://192.168.1.85:8080/matricula/listarPorCiclo`, {
+        const response = await axios.get(`${BASE_URL}:8080/matricula/listarPorCiclo`, {
           params: { idCiclo: id }
         });
         setStudents(response.data);
@@ -27,7 +28,7 @@ const SectionDetail = () => {
 
     const fetchGradeRecords = async () => {
       try {
-        const response = await axios.get(`http://192.168.1.85:8090/notas/listarPorCiclo`, {
+        const response = await axios.get(`${BASE_URL}:8090/notas/listarPorCiclo`, {
           params: { idCiclo: id }
         });
         setGradeRecords(response.data);
@@ -66,7 +67,7 @@ const SectionDetail = () => {
 
     try {
         // Obtener detalles completos de Alumno antes de enviar la solicitud
-        const responseAlumno = await axios.get(`http://192.168.1.85:8080/alumnos/${selectedStudent}`);
+        const responseAlumno = await axios.get(`${BASE_URL}:8080/alumnos/${selectedStudent}`);
         const alumno = responseAlumno.data;
 
         const ciclo = { id: id }; // No necesita obtenerlo si ya lo tienes en detalle en el frontend
@@ -77,7 +78,7 @@ const SectionDetail = () => {
             ...processedGrades,
         };
 
-        const response = await axios.post('http://192.168.1.85:8090/notas/guardar', notaData);
+        const response = await axios.post(`${BASE_URL}:8090/notas/guardar`, notaData);
         console.log(response.data);
         alert("Notas registradas con éxito");
         // Volver a cargar los registros de notas

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Dashboard from '../components/Dashboard';
+import { BASE_URL } from '../config/apiConfig'; 
 
 const SupervisorView = () => {
   const [sections, setSections] = useState([]);
@@ -12,7 +13,7 @@ const SupervisorView = () => {
       console.log("Instructor obtenido:", instructor);
       if (instructor && instructor.id) {
         try {
-          const response = await axios.get(`http://192.168.1.85:8080/ciclos/ciclosPorInstructor`, {
+          const response = await axios.get(`${BASE_URL}:8080/ciclos/ciclosPorInstructor`, {
             params: { instructorId: instructor.id }
           });
           console.log("Data from API:", response.data);

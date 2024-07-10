@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaClock, FaUniversity } from 'react-icons/fa';
 import SidebarStudent from '../components/SidebarStudent';
+import { BASE_URL } from '../config/apiConfig';
 
 const RegistEstudiante = () => {
   const [alumno, setAlumno] = useState(null);
@@ -39,7 +40,7 @@ const RegistEstudiante = () => {
     setError('');
 
     try {
-      const cicloResponse = await fetch(`http://192.168.1.85:8080/ciclos/buscar?ciclo=${ciclo}&modalidad=${modalidad}&universidad=${universidad}`);
+      const cicloResponse = await fetch(`${BASE_URL}:8080/ciclos/buscar?ciclo=${ciclo}&modalidad=${modalidad}&universidad=${universidad}`);
       if (!cicloResponse.ok) {
         throw new Error('Ciclo not found');
       }
@@ -54,7 +55,7 @@ const RegistEstudiante = () => {
 
       console.log('Matricula a registrar:', matricula); // Verificar los datos de la matrícula
 
-      const response = await fetch('http://192.168.1.85:8080/matricula/registrar', {
+      const response = await fetch(`${BASE_URL}:8080/matricula/registrar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

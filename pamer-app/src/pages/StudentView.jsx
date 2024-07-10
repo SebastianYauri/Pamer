@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { FaBook, FaClock, FaChalkboard, FaUserGraduate, FaRegStar } from 'react-icons/fa'; // Importar iconos adicionales
 import { motion } from 'framer-motion';
 import axios from 'axios'; // Importa axios para hacer llamadas a la API
+import { BASE_URL } from '../config/apiConfig';
 
 const StudentView = () => {
   const [isOpen, setIsOpen] = useState(true); // Estado para controlar la visibilidad del sidebar
@@ -29,7 +30,7 @@ const StudentView = () => {
     const fetchGrades = async () => {
       if (alumno) {
         try {
-          const response = await axios.get(`http://192.168.1.85:8090/notas/listarPorAlumno`, {
+          const response = await axios.get(`${BASE_URL}:8090/notas/listarPorAlumno`, {
             params: { idAlumno: alumno.id },
           });
           setGradesData(response.data);
