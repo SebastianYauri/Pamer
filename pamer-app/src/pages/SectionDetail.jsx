@@ -25,7 +25,19 @@ const SectionDetail = () => {
       }
     };
 
+    const fetchGradeRecords = async () => {
+      try {
+        const response = await axios.get(`http://192.168.1.85:8090/notas/listarPorCiclo`, {
+          params: { idCiclo: id }
+        });
+        setGradeRecords(response.data);
+      } catch (error) {
+        setError("Error al obtener los registros de notas");
+      }
+    };
+
     fetchStudents();
+    fetchGradeRecords();
   }, [id]);
 
   const section = {
@@ -68,12 +80,13 @@ const SectionDetail = () => {
         const response = await axios.post('http://192.168.1.85:8090/notas/guardar', notaData);
         console.log(response.data);
         alert("Notas registradas con éxito");
+        // Volver a cargar los registros de notas
+        
     } catch (error) {
         console.error("Error al registrar las notas:", error.response ? error.response.data : error.message);
         alert("Error al registrar las notas");
     }
   };
-
 
   const handlePrint = () => {
     window.print(); // Función para imprimir la página
@@ -188,9 +201,9 @@ const SectionDetail = () => {
           </select>
         </div>
         <div className="grid grid-cols-5 gap-4 mb-4">
-          {['note1', 'note2', 'note3', 'note4', 'note5'].map(note => (
-            <div key={note}>
-              <label htmlFor={note} className="block mb-2">{`Nota ${note.charAt(note.length - 1)}`}</label>
+          {['note1', 'note2', 'note3', 'note4', 'note5'].map((note, index) => (
+            <div key={index}>
+              <label htmlFor={note} className="block mb-2">{`Nota ${index + 1}`}</label>
               <input
                 type="number"
                 id={note}
@@ -204,11 +217,12 @@ const SectionDetail = () => {
         </div>
         <button
           onClick={handleSubmit}
-          className="bg-blue-500 text-white py-2 px-4 rounded shadow-md hover:bg-blue-600 transition duration-300"
+          className="px-4 py-2 bg-blue-500 text-white rounded"
         >
           Registrar Notas
         </button>
       </div>
+
       <div className="mt-8">
         <motion.h2
           className="text-3xl font-bold mb-4"
@@ -216,57 +230,39 @@ const SectionDetail = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Lista de Alumnos Matriculados
+          Alumnos y Notas
         </motion.h2>
-        <ul className="list-disc list-inside">
-          {students.map((student, index) => (
-            <li key={index}>
-              {student.nombre} {student.apellido}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="mt-8">
-        <motion.h2
-          className="text-3xl font-bold mb-4"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          Registro de Notas
-        </motion.h2>
-        <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="py-2 px-4 border-b">Nombre</th>
-              <th className="py-2 px-4 border-b">Nota 1</th>
-              <th className="py-2 px-4 border-b">Nota 2</th>
-              <th className="py-2 px-4 border-b">Nota 3</th>
-              <th className="py-2 px-4 border-b">Nota 4</th>
-              <th className="py-2 px-4 border-b">Nota 5</th>
-            </tr>
-          </thead>
-          <tbody>
-            {gradeRecords.map((record, index) => (
-              <tr key={index} className="text-center">
-                <td className={`py-2 px-4 border-b ${index === 0 ? 'bg-gray-100' : ''}`}>{record.name}</td>
-                <td className={`py-2 px-4 border-b ${index === 0 ? 'bg-gray-100' : ''}`}>{record.note1}</td>
-                <td className={`py-2 px-4 border-b ${index === 0 ? 'bg-gray-100' : ''}`}>{record.note2}</td>
-                <td className={`py-2 px-4 border-b ${index === 0 ? 'bg-gray-100' : ''}`}>{record.note3}</td>
-                <td className={`py-2 px-4 border-b ${index === 0 ? 'bg-gray-100' : ''}`}>{record.note4}</td>
-                <td className={`py-2 px-4 border-b ${index === 0 ? 'bg-gray-100' : ''}`}>{record.note5}</td>
+        {/* Tabla de alumnos y notas */}
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white border">
+            <thead>
+              <tr>
+                <th className="px-4 py-2 border">ID</th>
+                <th className="px-4 py-2 border">Nombre</th>
+                <th className="px-4 py-2 border">Apellido</th>
+                <th className="px-4 py-2 border">Nota 1</th>
+                <th className="px-4 py-2 border">Nota 2</th>
+                <th className="px-4 py-2 border">Nota 3</th>
+                <th className="px-4 py-2 border">Nota 4</th>
+                <th className="px-4 py-2 border">Nota 5</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="mt-8">
-        <button
-          onClick={handlePrint}
-          className="bg-green-500 text-white py-2 px-4 rounded shadow-md hover:bg-green-600 transition duration-300"
-        >
-          Imprimir en PDF
-        </button>
+            </thead>
+            <tbody>
+              {gradeRecords.map((record) => (
+                <tr key={record.alumno.id}>
+                  <td className="px-4 py-2 border">{record.alumno.id}</td>
+                  <td className="px-4 py-2 border">{record.alumno.nombre}</td>
+                  <td className="px-4 py-2 border">{record.alumno.apellido}</td>
+                  <td className="px-4 py-2 border">{record.n1}</td>
+                  <td className="px-4 py-2 border">{record.n2}</td>
+                  <td className="px-4 py-2 border">{record.n3}</td>
+                  <td className="px-4 py-2 border">{record.n4}</td>
+                  <td className="px-4 py-2 border">{record.n5}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
