@@ -23,14 +23,14 @@ const AppContent = () => {
   const location = useLocation();
 
   // Rutas que deben ocultar Navbar y Footer
-  const hideNavbarAndFooterRoutes = ['/login', '/supervisor', '/section', '/student', '/registro/estudiante', '/student/boletapago'];
+  const hideNavbarAndFooterRoutes = ['/login', '/supervisor', '/section', '/student', '/registro/estudiante', '/boletapago'];
 
   // Determinar cuándo ocultar Navbar y Footer
   const hideNavbarAndFooter = hideNavbarAndFooterRoutes.some(path => location.pathname.startsWith(path));
 
   // Determinar cuándo mostrar SidebarSupervisor o SidebarStudent
   const showSidebarSupervisor = location.pathname.startsWith('/supervisor') || location.pathname.startsWith('/section');
-  const showSidebarStudent = location.pathname.startsWith('/student') && !location.pathname.startsWith('/student/boletapago');
+  const showSidebarStudent = location.pathname.startsWith('/student') && !location.pathname.startsWith('/boletapago');
   
   return (
     <div className="flex min-h-screen">
@@ -53,7 +53,7 @@ const AppContent = () => {
             <Route path="/unmsm" element={<UNMSM />} /> {/* Ruta para UNI */}
             <Route path="/ulima" element={<ULIMA />} /> {/* Ruta para UNI */}
             <Route path="/pucp" element={<PUCP />} /> {/* Ruta para UNI */}
-            <Route path="/student/boletapago" element={<BoletaPago />} /> {/* Ruta para BoletaPago */}
+            <Route path="/boletapago" element={<BoletaPago />} /> {/* Ruta para BoletaPago */}
           </Routes>
         </main>
         {!hideNavbarAndFooter && <Footer />}
