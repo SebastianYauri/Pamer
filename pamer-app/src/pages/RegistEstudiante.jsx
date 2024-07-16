@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaClock, FaUniversity } from 'react-icons/fa';
 import SidebarStudent from '../components/SidebarStudent';
 import { BASE_URL } from '../config/apiConfig';
+import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 
 const RegistEstudiante = () => {
   const [alumno, setAlumno] = useState(null);
@@ -9,6 +10,7 @@ const RegistEstudiante = () => {
   const [universidad, setUniversidad] = useState('');
   const [ciclo, setCiclo] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Usar useNavigate
 
   useEffect(() => {
     // Recuperar el objeto Alumno desde localStorage
@@ -53,8 +55,6 @@ const RegistEstudiante = () => {
         ciclo: cicloData
       };
 
-      console.log('Matricula a registrar:', matricula); // Verificar los datos de la matrícula
-
       const response = await fetch(`${BASE_URL}:8080/matricula/registrar`, {
         method: 'POST',
         headers: {
@@ -65,29 +65,27 @@ const RegistEstudiante = () => {
 
       if (!response.ok) {
         const errorDetails = await response.json();
-        console.error('Error details:', errorDetails); // Detalles del error
         throw new Error(`Failed to register matricula: ${errorDetails.message || response.statusText}`);
       }
 
       alert('Matrícula registrada con éxito');
+
+      // Redirigir a la página de boleta de pago y pasar los datos de matrícula
+      navigate('/boletapago', { state: { matricula: matricula } });
     } catch (error) {
-      console.error('Error en el registro:', error); // Detalles completos del error
+      console.error('Error en el registro:', error);
       setError(error.message);
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-100 to-blue-300 flex">
-      <SidebarStudent /> {/* Muestra el SidebarStudent */}
+      <SidebarStudent />
       <div className="flex-grow ml-64 flex flex-col p-10">
         <div className="max-w-4xl w-full space-y-8 bg-white rounded-lg shadow-lg">
           <div className="text-center">
-            <h2 className="text-3xl font-extrabold text-blue-900 mt-4">
-              Formulario de Matrícula
-            </h2>
-            <p className="mt-2 text-sm text-gray-600">
-              Por favor, completa los siguientes campos para matricularte.
-            </p>
+            <h2 className="text-3xl font-extrabold text-blue-900 mt-4">Formulario de Matrícula</h2>
+            <p className="mt-2 text-sm text-gray-600">Por favor, completa los siguientes campos para matricularte.</p>
           </div>
           
           <form className="space-y-8" onSubmit={handleSubmit}>
@@ -152,14 +150,10 @@ const RegistEstudiante = () => {
             <div className="space-y-4">
               <div className="flex items-center">
                 <>&nbsp;&nbsp;&nbsp;</><input type="checkbox" className="form-checkbox text-blue-600" />
-                <span className="ml-2 text-gray-600">
-                  Acepto las políticas de privacidad
-                </span>
+                <span className="ml-2 text-gray-600">Acepto las políticas de privacidad</span>
               </div>
               <div className="flex justify-center">
-                <button className="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                  Registrar
-                </button>
+                <button className="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Registrar</button>
               </div>
             </div>
           </form>
