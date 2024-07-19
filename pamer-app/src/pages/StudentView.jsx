@@ -11,6 +11,7 @@ const StudentView = () => {
   const [isOpen, setIsOpen] = useState(true); // Estado para controlar la visibilidad del sidebar
   const [gradesData, setGradesData] = useState([]); // Estado para almacenar las notas del alumno
   const [alumno, setAlumno] = useState(null); // Estado para almacenar los datos del alumno
+  const [matriculasData, setMatriculasData] = useState([]); // Estado para almacenar las matriculas del alumno
 
   // Función para alternar la visibilidad del sidebar
   const toggleSidebar = () => {
@@ -41,6 +42,24 @@ const StudentView = () => {
     };
 
     fetchGrades();
+  }, [alumno]);
+
+  // Hook para obtener las matriculas del alumno desde el backend
+  useEffect(() => {
+    const fetchMatriculas = async () => {
+      if (alumno) {
+        try {
+          const response = await axios.get(`${BASE_URL}:8080/matricula/listarPorAlumno`, {
+            params: { idAlumno: alumno.id },
+          });
+          setMatriculasData(response.data);
+        } catch (error) {
+          console.error("Error fetching matriculas data:", error);
+        }
+      }
+    };
+
+    fetchMatriculas();
   }, [alumno]);
 
   // Datos de ejemplo para el slider de banners
@@ -161,7 +180,7 @@ const StudentView = () => {
               <div className="flex items-center space-x-4">
                 <FaRegStar className="text-4xl text-blue-500" />
                 <div>
-                  <h3 className="text-lg font-semibold">{grade.ciclo.nombre}</h3>
+                  <h3 className="text-lg font-semibold">Ciclo: {grade.ciclo.ciclo}</h3>
                   <p className="text-sm text-gray-500">Alumno: {grade.alumno.nombre}</p>
                 </div>
               </div>
@@ -186,6 +205,37 @@ const StudentView = () => {
                   <p className="font-bold">N5</p>
                   <p>{grade.n5}</p>
                 </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Sección de Matrículas */}
+      <div>
+        <h2 className="text-xl font-semibold mb-4 flex items-center space-x-2">
+          <FaUserGraduate className="text-blue-500 animate-bounce" />
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
+            Matrículas
+          </motion.span>
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {matriculasData.map((matricula, index) => (
+            <div key={index} className="bg-white shadow-md rounded-lg p-6 flex flex-col space-y-4">
+              <div className="flex items-center space-x-4">
+                <FaChalkboard className="text-4xl text-blue-500" />
+                <div>
+                  <h3 className="text-lg font-semibold">Ciclo: {matricula.ciclo.ciclo}</h3>
+                  <p className="text-sm text-gray-500">Fecha: {matricula.fecha}</p>
+                </div>
+              </div>
+              <div className="text-center">
+                <p className="font-bold">Pago</p>
+                <p>{matricula.pago}</p>
               </div>
             </div>
           ))}
