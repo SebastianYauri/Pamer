@@ -26,6 +26,7 @@ const Login = () => {
       if (response.status === 200) {
         localStorage.setItem("authToken", JSON.stringify(response.data.token));
         localStorage.setItem("alumno", JSON.stringify(response.data));
+        console.log("alumno almacenado:", localStorage.getItem("alumno"));
         navigate("/student");
       }
     } catch (error) {

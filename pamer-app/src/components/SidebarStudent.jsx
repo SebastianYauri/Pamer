@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaUser, FaBook, FaSignOutAlt, FaBars, FaHome } from 'react-icons/fa'; // Importa FaHome
 
 const SidebarStudent = () => {
   const [isOpen, setIsOpen] = useState(true);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
-
+  const handleLogout = () => {
+    // Eliminar el token de autenticación del almacenamiento local
+    localStorage.removeItem('authToken');
+    // Redirigir al usuario a la página de inicio de sesión
+    navigate('/login');
+  };
   const getLinkClass = (path) => {
     return location.pathname === path
       ? 'text-white bg-gray-600'
@@ -47,7 +53,7 @@ const SidebarStudent = () => {
             </Link>
           </li>
           <li className={`flex items-center justify-center py-2 px-4 rounded ${isOpen ? '' : 'w-full'}`}>
-            <button onClick={() => { /* lógica para cerrar sesión */ }} className={`flex items-center ${isOpen ? 'flex-col justify-center items-center' : 'flex-row justify-start items-center'} hover:underline`}>
+          <button onClick={handleLogout} className={`flex items-center ${isOpen ? 'flex-col justify-center items-center' : 'flex-row justify-start items-center'} hover:underline`}>
               <FaSignOutAlt className="text-2xl" />
               <span className={`ml-2 ${isOpen ? 'text-lg' : 'hidden'}`}>Cerrar Sesión</span>
             </button>
