@@ -58,11 +58,11 @@ const SectionDetail = () => {
 
   const handleSubmit = async () => {
     const processedGrades = {
-      n1: grades.note1 ? parseFloat(grades.note1) : 0,
-      n2: grades.note2 ? parseFloat(grades.note2) : 0,
-      n3: grades.note3 ? parseFloat(grades.note3) : 0,
-      n4: grades.note4 ? parseFloat(grades.note4) : 0,
-      n5: grades.note5 ? parseFloat(grades.note5) : 0,
+      n1: grades.note1 ? parseFloat(grades.note1) : null,
+      n2: grades.note2 ? parseFloat(grades.note2) : null,
+      n3: grades.note3 ? parseFloat(grades.note3) : null,
+      n4: grades.note4 ? parseFloat(grades.note4) : null,
+      n5: grades.note5 ? parseFloat(grades.note5) : null,
     };
 
     try {
