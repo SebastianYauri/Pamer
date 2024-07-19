@@ -3,6 +3,7 @@ import headerImg from '/logo.svg'; // Ajusta la ruta a tu imagen de encabezado
 import studentIcon from '/user.svg'; // Ajusta la ruta a tu icono de estudiante
 import guardianIcon from '/user.svg'; // Ajusta la ruta a tu icono de apoderado
 import { BASE_URL } from '../config/apiConfig'; 
+import { useNavigate } from 'react-router-dom';
 
 const Registration = () => {
   const [alumno, setAlumno] = useState({
@@ -20,6 +21,8 @@ const Registration = () => {
     correo: '',
     dni: '',
   });
+
+  const navigate = useNavigate(); // Mueve el uso de useNavigate aquí dentro del componente
 
   const handleInputChange = (e, type) => {
     const { name, value } = e.target;
@@ -68,6 +71,7 @@ const Registration = () => {
       }
 
       alert('Registro exitoso');
+      navigate('/'); // Redirige al home después del registro exitoso
     } catch (error) {
       console.error('Error al registrar:', error);
       alert('Error al registrar: ' + error.message);
