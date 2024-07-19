@@ -24,6 +24,7 @@ const Login = () => {
         },
       });
       if (response.status === 200) {
+        localStorage.setItem("authToken", JSON.stringify(response.data.token));
         localStorage.setItem("alumno", JSON.stringify(response.data));
         navigate("/student");
       }
@@ -42,9 +43,9 @@ const Login = () => {
         },
       });
       if (response.status === 200) {
+        localStorage.setItem("authToken", JSON.stringify(response.data.token));
         localStorage.setItem("instructor", JSON.stringify(response.data));
         console.log("Instructor almacenado:", localStorage.getItem("instructor"));
-
         navigate("/supervisor");
       }
     } catch (error) {

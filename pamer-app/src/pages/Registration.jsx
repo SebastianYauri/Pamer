@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import headerImg from '/logo.svg'; // Ajusta la ruta a tu imagen de encabezado
 import studentIcon from '/user.svg'; // Ajusta la ruta a tu icono de estudiante
 import guardianIcon from '/user.svg'; // Ajusta la ruta a tu icono de apoderado
+import { BASE_URL } from '../config/apiConfig'; 
 
 const Registration = () => {
   const [alumno, setAlumno] = useState({
@@ -34,7 +35,7 @@ const Registration = () => {
 
     try {
       // Guardar al alumno
-      const alumnoResponse = await fetch('http://192.168.1.85:8080/alumnos/guardar', {
+      const alumnoResponse = await fetch(`${BASE_URL}:8080/alumnos/guardar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -54,7 +55,7 @@ const Registration = () => {
         alumno: savedAlumno, // Asignar el alumno guardado al apoderado
       };
 
-      const apoderadoResponse = await fetch('http://192.168.1.85:8080/apoderados/guardar', {
+      const apoderadoResponse = await fetch(`${BASE_URL}:8080/apoderados/guardar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
