@@ -53,7 +53,11 @@ const SectionDetail = () => {
 
   const handleGradeChange = (e) => {
     const { name, value } = e.target;
-    setGrades({ ...grades, [name]: value }); // Actualizar el estado de las notas
+    const numericValue = parseFloat(value);
+  
+    if (numericValue >= 0 && numericValue <= 100) {
+      setGrades({ ...grades, [name]: value });
+    }
   };
 
   const handleSubmit = async () => {
@@ -220,6 +224,8 @@ const SectionDetail = () => {
                 value={grades[`note${num}`]}
                 onChange={handleGradeChange}
                 className="w-full p-2 border border-gray-300 rounded"
+                min="0" // Añadir el atributo min
+                max="100" // Añadir el atributo max
               />
             </div>
           ))}
