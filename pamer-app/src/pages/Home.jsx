@@ -12,10 +12,10 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 const universities = [
-  { name: 'San Marcos', logo: '/logo-unmsm.svg' },
-  { name: 'UNI', logo: '/logo-uni.svg' },
-  { name: 'PUCP', logo: '/logo-pucp.svg' },
-  { name: 'ULIMA', logo: '/logo-ulima.svg' },
+  { name: 'San Marcos', logo: 'Pamer/logo-unmsm.svg' },
+  { name: 'UNI', logo: 'Pamer/logo-uni.svg' },
+  { name: 'PUCP', logo: 'Pamer/logo-pucp.svg' },
+  { name: 'ULIMA', logo: 'Pamer/logo-ulima.svg' },
 ];
 
 const Home = () => {
