@@ -40,8 +40,8 @@ const SidebarStudent = () => {
               <span className={`ml-2 ${isOpen ? 'text-lg' : 'hidden'}`}>Home</span>
             </Link>
           </li>
-          <li className={`flex items-center justify-center ${getLinkClass('/profile')} py-2 px-4 rounded ${isOpen ? '' : 'w-full'}`}>
-            <Link to="/profile" className={`flex items-center ${isOpen ? 'flex-col justify-center items-center' : 'flex-row justify-start items-center'} hover:underline`}>
+          <li className={`flex items-center justify-center ${getLinkClass('/student/profile')} py-2 px-4 rounded ${isOpen ? '' : 'w-full'}`}>
+            <Link to="/student/profile" className={`flex items-center ${isOpen ? 'flex-col justify-center items-center' : 'flex-row justify-start items-center'} hover:underline`}>
               <FaUser className="text-2xl" />
               <span className={`ml-2 ${isOpen ? 'text-lg' : 'hidden'}`}>Perfil</span>
             </Link>
