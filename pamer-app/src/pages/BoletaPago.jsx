@@ -3,10 +3,11 @@ import { useReactToPrint } from 'react-to-print';
 import SidebarStudent from '../components/SidebarStudent';
 import logo from '/logo.svg'; // Importar el logo
 import finalImage from '/boleta.jpg'; // Importar la imagen final
-import { useLocation } from 'react-router-dom'; // Importar useLocation
+import { useLocation  , useNavigate} from 'react-router-dom'; // Importar useLocation
 
 const BoletaPago = () => {
   const location = useLocation(); // Usar useLocation para acceder a location
+  const navigate = useNavigate();
   const { state } = location;
   const { matricula } = state || {}; // Extraer los datos de matrícula
 
@@ -62,7 +63,7 @@ const BoletaPago = () => {
             >
               Imprimir Boleta
             </button>
-            <button className="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700">
+            <button  onClick={() => navigate('/student')} className="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700">
               Volver al Dashboard
             </button>
           </div>
