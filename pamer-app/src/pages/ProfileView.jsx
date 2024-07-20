@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaUser, FaUniversity, FaIdCard, FaEnvelope, FaRegCalendarAlt } from 'react-icons/fa';
 import axios from 'axios'; // Importa axios para hacer llamadas a la API
 import { BASE_URL } from '../config/apiConfig';
+import Barcode from 'react-barcode';
 
 const ProfileView = () => {
   const [alumno, setAlumno] = useState(null); // Estado para almacenar los datos del alumno
@@ -18,7 +19,7 @@ const ProfileView = () => {
   // Hook para obtener las matriculas del alumno
   useEffect(() => {
     const fetchMatriculas = async () => {
-      if (alumno) {
+      if (alumno && alumno.id) {
         try {
           const response = await axios.get(`${BASE_URL}:8080/matricula/listarPorAlumno`, {
             params: { idAlumno: alumno.id },
@@ -34,28 +35,23 @@ const ProfileView = () => {
   }, [alumno]);
 
   // Datos del perfil del alumno
-  const fetchAlumnoData = async () => {
-    if (alumno?.id) { // Asegúrate de que alumno.id esté definido
-      try {
-        console.log("Fetching data for idAlumno:", alumno.id); // Agrega este log
-        const response = await axios.get(`${BASE_URL}:8080/alumnos/perfil`, {
-          params: { idAlumno: alumno.id },
-        });
-        setAlumno(response.data);
-      } catch (error) {
-        console.error('Error al obtener los datos del estudiante:', error.response?.data || error.message); // Agrega error.response?.data para ver el mensaje de error
-      }
-    } else {
-      console.error('ID del alumno no está definido.');
-    }
-  };
-  
-
   useEffect(() => {
-    if (alumno) {
-      fetchAlumnoData();
-    }
-  }, [alumno]);
+    const fetchAlumnoData = async () => {
+      if (alumno && alumno.id) { // Asegúrate de que alumno.id esté definido
+        try {
+          console.log("Fetching data for idAlumno:", alumno.id); // Agrega este log
+          const response = await axios.get(`${BASE_URL}:8080/alumnos/perfil`, {
+            params: { idAlumno: alumno.id },
+          });
+          setAlumno(response.data);
+        } catch (error) {
+          console.error('Error al obtener los datos del estudiante:', error.response?.data || error.message); // Agrega error.response?.data para ver el mensaje de error
+        }
+      }
+    };
+
+    fetchAlumnoData();
+  }, [alumno?.id]);
 
   // Obtiene el primer ciclo de la lista de matriculas
   const ciclo = matriculasData.length > 0 ? matriculasData[0].ciclo : null;
@@ -123,10 +119,25 @@ const ProfileView = () => {
         </div>
       </div>
       <div className="flex flex-col items-center mt-8">
+        <div className="barcode-container flex flex-col items-center">
+          {alumno?.dni && (
+            <>
+              <Barcode
+                value={alumno.dni}
+                format="CODE128"
+                width={2}        // Ajusta el ancho
+                height={80}      // Ajusta la altura
+                displayValue={false}
+                className="mb-2"
+              />
+              <p className="text-xl font-bold">{alumno.dni}</p>
+            </>
+          )}
+        </div>
         <img
           src="/profile2.jpg"
           alt="Profile"
-          className="w-90 h-80"
+          className="w-90 h-80 mt-4"
         />
       </div>
     </div>
