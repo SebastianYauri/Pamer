@@ -22,7 +22,7 @@ const PUCP = () => {
         <Slider {...settings} className="w-full">
           <div>
             <img
-              src="/pucp1.webp"
+              src="Pamer/pucp1.webp"
               alt="UNMSM Banner 1"
               className="w-full h-auto object-contain rounded-lg"
               style={{ maxHeight: '300px' }}
@@ -30,7 +30,7 @@ const PUCP = () => {
           </div>
           <div>
             <img
-              src="/pucp2.webp"
+              src="Pamer/pucp2.webp"
               alt="UNMSM Banner 2"
               className="w-full h-auto object-contain rounded-lg"
               style={{ maxHeight: '300px' }}

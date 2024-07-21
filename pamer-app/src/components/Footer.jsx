@@ -1,6 +1,7 @@
 // src/components/CustomFooter.jsx
 import React from 'react';
 import { BsFacebook, BsInstagram, BsTwitter, BsTiktok, BsYoutube } from "react-icons/bs";
+import footImg from '/logo-white.svg';
 
 const CustomFooter = () => {
   return (
@@ -9,7 +10,7 @@ const CustomFooter = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           <div className="flex items-center justify-center md:justify-start">
             <a href="Pamer/logo.svg" className="flex items-center">
-              <img alt="Pamer Logo" src="/logo-white.svg" className="h-8" />
+              <img alt="Pamer Logo" src={footImg} className="h-8" />
             </a>
           </div>
           <div>
