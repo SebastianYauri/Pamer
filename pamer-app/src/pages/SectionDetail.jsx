@@ -4,6 +4,7 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import { FaMapMarkerAlt, FaClock, FaInfoCircle, FaGraduationCap } from 'react-icons/fa';
 import { BASE_URL } from '../config/apiConfig';
+import { BASE_URL1 } from '../config/apiConfig';
 
 const SectionDetail = () => {
   const { id } = useParams(); // Obtener el id de la sección desde los parámetros de la ruta
@@ -28,7 +29,7 @@ const SectionDetail = () => {
 
     const fetchGradeRecords = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}:8090/notas/listarPorCiclo`, {
+        const response = await axios.get(`${BASE_URL1}:8090/notas/listarPorCiclo`, {
           params: { idCiclo: id }
         });
         setGradeRecords(response.data);
@@ -82,7 +83,7 @@ const SectionDetail = () => {
         ...processedGrades,
       };
 
-      const response = await axios.post(`${BASE_URL}:8090/notas/guardar`, notaData);
+      const response = await axios.post(`${BASE_URL1}:8090/notas/guardar`, notaData);
       console.log(response.data);
       alert("Notas registradas con éxito");
       // Volver a cargar los registros de notas

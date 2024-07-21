@@ -6,6 +6,7 @@ import { FaBook, FaClock, FaChalkboard, FaUserGraduate, FaRegStar } from 'react-
 import { motion } from 'framer-motion';
 import axios from 'axios'; // Importa axios para hacer llamadas a la API
 import { BASE_URL } from '../config/apiConfig';
+import { BASE_URL1 } from '../config/apiConfig';
 import { useReactToPrint } from 'react-to-print';
 
 const StudentView = () => {
@@ -33,7 +34,7 @@ const StudentView = () => {
     const fetchGrades = async () => {
       if (alumno) {
         try {
-          const response = await axios.get(`${BASE_URL}:8090/notas/listarPorAlumno`, {
+          const response = await axios.get(`${BASE_URL1}:8090/notas/listarPorAlumno`, {
             params: { idAlumno: alumno.id },
           });
           setGradesData(response.data);

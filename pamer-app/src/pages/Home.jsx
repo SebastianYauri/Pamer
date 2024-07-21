@@ -90,13 +90,13 @@ const Home = () => {
           autoplaySpeed={3000}
         >
           <div className="h-full">
-            <img src="/slide1.jpg" alt="Imagen 1" className="w-full h-full object-cover" />
+            <img src="Pamer/slide1.jpg" alt="Imagen 1" className="w-full h-full object-cover" />
           </div>
           <div className="h-full">
-            <img src="/slide2.jpg" alt="Imagen 2" className="w-full h-full object-cover" />
+            <img src="Pamer/slide2.jpg" alt="Imagen 2" className="w-full h-full object-cover" />
           </div>
           <div className="h-full">
-            <img src="/slide3.jpg" alt="Imagen 3" className="w-full h-full object-cover" />
+            <img src="Pamer/slide3.jpg" alt="Imagen 3" className="w-full h-full object-cover" />
           </div>
         </Slider>
       </div>
@@ -175,16 +175,16 @@ const Home = () => {
             className="mySwiper"
           >
             <SwiperSlide>
-              <img src="/a3.png" alt="Estudiante 1" className="w-full h-full object-cover" />
+              <img src="Pamer/a3.png" alt="Estudiante 1" className="w-full h-full object-cover" />
             </SwiperSlide>
             <SwiperSlide>
-              <img src="/a2.png" alt="Estudiante 2" className="w-full h-full object-cover" />
+              <img src="Pamer/a2.png" alt="Estudiante 2" className="w-full h-full object-cover" />
             </SwiperSlide>
             <SwiperSlide>
-              <img src="/a1.png" alt="Estudiante 3" className="w-full h-full object-cover" />
+              <img src="Pamer/a1.png" alt="Estudiante 3" className="w-full h-full object-cover" />
             </SwiperSlide>
             <SwiperSlide>
-              <img src="/a4.jpg" alt="Estudiante 4" className="w-full h-full object-cover" />
+              <img src="Pamer/a4.jpg" alt="Estudiante 4" className="w-full h-full object-cover" />
             </SwiperSlide>
           </Swiper>
         </div>

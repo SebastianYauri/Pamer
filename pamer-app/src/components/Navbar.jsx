@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
+import headerImg from '/logo.svg';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,7 +43,7 @@ const Navbar = () => {
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <Link to="/">
-            <img src="/logo.svg" alt="Logo" className="h-20 w-20" />
+            <img src={headerImg} alt="Logo" className="h-20 w-20" />
           </Link>
         </div>
         <div className="md:hidden">
