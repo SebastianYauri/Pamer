@@ -71,7 +71,7 @@ const AppContent = () => {
 
 const App = () => {
   return (
-    <Router>
+    <Router basename='Pamer'>
       <AppContent />
     </Router>
   );
