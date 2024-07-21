@@ -49,7 +49,7 @@ const SectionDetail = () => {
     modality: 'Presencial',
     location: 'Ciudad',
     schedule: 'Horario',
-    imageUrl: 'Pamer/details.jpg', // URL de imagen de ejemplo
+    imageUrl: 'details.jpg', // URL de imagen de ejemplo
   };
 
   const handleGradeChange = (e) => {

@@ -31,10 +31,10 @@ const UNMSM = () => {
       <div className="max-w-screen-xl mx-auto mb-8 w-3/4">
         <Slider {...settings} className="w-full">
           <div>
-            <img src="Pamer/SM1.png" alt="UNMSM Banner 1" className="w-full h-auto object-contain" style={{ maxHeight: '300px' }} />
+            <img src="SM1.png" alt="UNMSM Banner 1" className="w-full h-auto object-contain" style={{ maxHeight: '300px' }} />
           </div>
           <div>
-            <img src="Pamer/SM2.png" alt="UNMSM Banner 2" className="w-full h-auto object-contain" style={{ maxHeight: '300px' }} />
+            <img src="SM2.png" alt="UNMSM Banner 2" className="w-full h-auto object-contain" style={{ maxHeight: '300px' }} />
           </div>
         </Slider>
       </div>

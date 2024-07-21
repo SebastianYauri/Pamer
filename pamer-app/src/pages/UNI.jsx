@@ -21,10 +21,10 @@ const UNI = () => {
       <div className="max-w-screen-xl mx-auto mb-8 w-3/4">
         <Slider {...settings} className="w-full">
           <div>
-            <img src="Pamer/uni1.webp" alt="UNMSM Banner 1" className="w-full h-auto object-contain" style={{ maxHeight: '300px' }} />
+            <img src="uni1.webp" alt="UNMSM Banner 1" className="w-full h-auto object-contain" style={{ maxHeight: '300px' }} />
           </div>
           <div>
-            <img src="Pamer/uni2.webp" alt="UNMSM Banner 2" className="w-full h-auto object-contain" style={{ maxHeight: '300px' }} />
+            <img src="uni2.webp" alt="UNMSM Banner 2" className="w-full h-auto object-contain" style={{ maxHeight: '300px' }} />
           </div>
         </Slider>
       </div>

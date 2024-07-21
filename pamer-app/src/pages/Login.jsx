@@ -82,7 +82,7 @@ const Login = () => {
                 <div className="text-center mb-8">
                   <div className="flex items-center justify-center mb-4">
                     <a href="/logo.svg" className="flex items-center">
-                      <img alt="Pamer Logo" src="Pamer/logo.svg" className="h-8" />
+                      <img alt="Pamer Logo" src="logo.svg" className="h-8" />
                     </a>
                   </div>
                   <p className="text-[12px] text-gray-500">
@@ -153,7 +153,7 @@ const Login = () => {
                 <div className="text-center mb-8">
                   <div className="flex items-center justify-center mb-4">
                     <a href="/logo.svg" className="flex items-center">
-                      <img alt="Pamer Logo" src="Pamer/logo.svg" className="h-8" />
+                      <img alt="Pamer Logo" src="logo.svg" className="h-8" />
                     </a>
                   </div>
                   <p className="text-[12px] text-gray-500">
