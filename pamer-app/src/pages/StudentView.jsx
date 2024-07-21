@@ -67,9 +67,9 @@ const StudentView = () => {
 
   // Datos de ejemplo para el slider de banners
   const bannerImages = [
-    { id: 1, imageUrl: '/slide1.jpg' },
-    { id: 2, imageUrl: '/slide2.jpg' },
-    { id: 3, imageUrl: '/slide3.jpg' },
+    { id: 1, imageUrl: 'Pamer/slide1.jpg' },
+    { id: 2, imageUrl: 'Pamer/slide2.jpg' },
+    { id: 3, imageUrl: 'Pamer/slide3.jpg' },
   ];
 
   // Configuración del carousel
@@ -229,7 +229,7 @@ const StudentView = () => {
           </div>
         </div>
           <div className="mt-8">
-    <        img src="/boleta.jpg" alt="Notas Imagen" className="w-full h-auto rounded-lg shadow-md" />
+    <        img src="Pamer/boleta.jpg" alt="Notas Imagen" className="w-full h-auto rounded-lg shadow-md" />
           </div>
       </div>
       
