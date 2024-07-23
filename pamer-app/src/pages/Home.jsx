@@ -10,6 +10,9 @@ import { EffectCube, Pagination } from 'swiper/modules';
 import CountUp from 'react-countup';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import slide1 from '/slide1.jpg';
+import slide2 from '/slide2.jpg';
+import slide3 from '/slide3.jpg';
 
 const universities = [
   { name: 'San Marcos', logo: 'logo-unmsm.svg' },
@@ -90,13 +93,13 @@ const Home = () => {
           autoplaySpeed={3000}
         >
           <div className="h-full">
-            <img src="slide1.jpg" alt="Imagen 1" className="w-full h-full object-cover" />
+            <img src={slide1} alt="Imagen 1" className="w-full h-full object-cover" />
           </div>
           <div className="h-full">
-            <img src="slide2.jpg" alt="Imagen 2" className="w-full h-full object-cover" />
+            <img src={slide2} alt="Imagen 2" className="w-full h-full object-cover" />
           </div>
           <div className="h-full">
-            <img src="slide3.jpg" alt="Imagen 3" className="w-full h-full object-cover" />
+            <img src={slide3} alt="Imagen 3" className="w-full h-full object-cover" />
           </div>
         </Slider>
       </div>

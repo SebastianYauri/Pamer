@@ -67,7 +67,7 @@ const SidebarStudent = () => {
     <div className={`h-full ${isOpen ? 'w-56' : 'w-16'} bg-gray-800 text-white flex flex-col fixed top-0 bottom-0 transition-all duration-300`}>
       <div className="p-4 border-b border-gray-700 flex justify-between items-center">
         {isOpen && (
-          <img alt="Pamer Logo" src="/logo-white.svg" className="h-8" />
+          <img alt="Pamer Logo" src="/Pamer/logo-white.svg" className="h-8" />
         )}
         <button onClick={toggleSidebar} className="text-white ml-2">
           <FaBars />

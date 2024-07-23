@@ -66,7 +66,7 @@ const ProfileView = () => {
       <div className="bg-white shadow-md rounded-lg p-6">
         <div className="flex flex-col items-center mb-6">
           <img
-            src="/profile.webp"
+            src="/Pamer/profile.webp"
             alt="Profile"
             className="w-32 h-32 rounded-full mb-4"
           />
@@ -135,7 +135,7 @@ const ProfileView = () => {
           )}
         </div>
         <img
-          src="/profile2.jpg"
+          src="/Pamer/profile2.jpg"
           alt="Profile"
           className="w-90 h-80 mt-4"
         />
