@@ -38,7 +38,7 @@ const Registration = () => {
 
     try {
       // Guardar al alumno
-      const alumnoResponse = await fetch(`${BASE_URL}:8080/alumnos/guardar`, {
+      const alumnoResponse = await fetch(`${BASE_URL}/alumnos/guardar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ const Registration = () => {
         alumno: savedAlumno, // Asignar el alumno guardado al apoderado
       };
 
-      const apoderadoResponse = await fetch(`${BASE_URL}:8080/apoderados/guardar`, {
+      const apoderadoResponse = await fetch(`${BASE_URL}/apoderados/guardar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

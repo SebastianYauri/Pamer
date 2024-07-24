@@ -17,7 +17,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(`${BASE_URL}:8080/usuarios/login`, {
+      const response = await axios.get(`${BASE_URL}/usuarios/login`, {
         params: {
           correo: email,
           password: password,
@@ -37,7 +37,7 @@ const Login = () => {
   const handleSupervisorLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(`${BASE_URL}:8080/instructor/login`, {
+      const response = await axios.get(`${BASE_URL}/instructor/login`, {
         params: {
           correo: email,
           password: password,
@@ -86,7 +86,7 @@ const Login = () => {
                     </a>
                   </div>
                   <p className="text-[12px] text-gray-500">
-                    Ingresa tus datos para iniciar sesión
+                    Ingresa tus datos para iniciar sesiónn
                   </p>
                 </div>
                 <form onSubmit={handleLogin} className="flex flex-col gap-4">

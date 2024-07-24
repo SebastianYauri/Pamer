@@ -35,12 +35,6 @@ const SidebarSupervisor = () => {
       </div>
       <nav className="flex-grow p-4">
         <ul className="space-y-4">
-          <li className={`flex items-center justify-center ${getLinkClass('/profile')} py-2 px-4 rounded ${isOpen ? '' : 'w-full'}`}>
-            <Link to="/profile" className={`flex items-center ${isOpen ? 'flex-col justify-center items-center' : 'flex-row justify-start items-center'} hover:underline`}>
-              <FaUser className="text-2xl" />
-              <span className={`ml-2 ${isOpen ? 'text-lg' : 'hidden'}`}>Perfil</span>
-            </Link>
-          </li>
           <li className={`flex items-center justify-center ${getLinkClass('/supervisor')} py-2 px-4 rounded ${isOpen ? '' : 'w-full'}`}>
             <Link to="/supervisor" className={`flex items-center ${isOpen ? 'flex-col justify-center items-center' : 'flex-row justify-start items-center'} hover:underline`}>
               <FaList className="text-2xl" />

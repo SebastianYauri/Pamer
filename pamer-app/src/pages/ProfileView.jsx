@@ -21,7 +21,7 @@ const ProfileView = () => {
     const fetchMatriculas = async () => {
       if (alumno && alumno.id) {
         try {
-          const response = await axios.get(`${BASE_URL}:8080/matricula/listarPorAlumno`, {
+          const response = await axios.get(`${BASE_URL}/matricula/listarPorAlumno`, {
             params: { idAlumno: alumno.id },
           });
           setMatriculasData(response.data);
@@ -40,7 +40,7 @@ const ProfileView = () => {
       if (alumno && alumno.id) { // Asegúrate de que alumno.id esté definido
         try {
           console.log("Fetching data for idAlumno:", alumno.id); // Agrega este log
-          const response = await axios.get(`${BASE_URL}:8080/alumnos/perfil`, {
+          const response = await axios.get(`${BASE_URL}/alumnos/perfil`, {
             params: { idAlumno: alumno.id },
           });
           setAlumno(response.data);

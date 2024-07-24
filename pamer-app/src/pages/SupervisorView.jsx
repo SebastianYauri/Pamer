@@ -13,7 +13,7 @@ const SupervisorView = () => {
       console.log("Instructor obtenido:", instructor);
       if (instructor && instructor.id) {
         try {
-          const response = await axios.get(`${BASE_URL}:8080/ciclos/ciclosPorInstructor`, {
+          const response = await axios.get(`${BASE_URL}/ciclos/ciclosPorInstructor`, {
             params: { instructorId: instructor.id }
           });
           console.log("Data from API:", response.data);

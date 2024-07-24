@@ -34,7 +34,7 @@ const StudentView = () => {
     const fetchGrades = async () => {
       if (alumno) {
         try {
-          const response = await axios.get(`${BASE_URL1}:8090/notas/listarPorAlumno`, {
+          const response = await axios.get(`${BASE_URL1}/notas/listarPorAlumno`, {
             params: { idAlumno: alumno.id },
           });
           setGradesData(response.data);
@@ -52,7 +52,7 @@ const StudentView = () => {
     const fetchMatriculas = async () => {
       if (alumno) {
         try {
-          const response = await axios.get(`${BASE_URL}:8080/matricula/listarPorAlumno`, {
+          const response = await axios.get(`${BASE_URL}/matricula/listarPorAlumno`, {
             params: { idAlumno: alumno.id },
           });
           setMatriculasData(response.data);

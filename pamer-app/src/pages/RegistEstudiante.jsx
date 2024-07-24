@@ -42,7 +42,7 @@ const RegistEstudiante = () => {
     setError('');
 
     try {
-      const cicloResponse = await fetch(`${BASE_URL}:8080/ciclos/buscar?ciclo=${ciclo}&modalidad=${modalidad}&universidad=${universidad}`);
+      const cicloResponse = await fetch(`${BASE_URL}/ciclos/buscar?ciclo=${ciclo}&modalidad=${modalidad}&universidad=${universidad}`);
       if (!cicloResponse.ok) {
         throw new Error('Ciclo not found');
       }
@@ -55,7 +55,7 @@ const RegistEstudiante = () => {
         ciclo: cicloData
       };
 
-      const response = await fetch(`${BASE_URL}:8080/matricula/registrar`, {
+      const response = await fetch(`${BASE_URL}/matricula/registrar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
